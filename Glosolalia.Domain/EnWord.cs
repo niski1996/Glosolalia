@@ -8,9 +8,6 @@ namespace Glosolalia.Domain
 {
     public class EnWord:Word
     {
-        public EnWord(string val, Language lang) : base(val, lang)
-        {
-        }
 
         public List<EnWordPlWord> PlTranslation { get; set; }
     }

@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Glosolalia.Domain
+namespace Core.Common.Core
 {
-    public class Language
+    internal class TmpBase
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
     }
 }

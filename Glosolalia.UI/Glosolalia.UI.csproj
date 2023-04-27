@@ -14,9 +14,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Glosolalia.Data\Glosolalia.Data.csproj" />
-    <ProjectReference Include="..\Glosolalia.Domain\Glosolalia.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

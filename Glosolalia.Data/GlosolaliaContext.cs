@@ -25,6 +25,8 @@ namespace Glosolalia.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             modelBuilder.Entity<EnWordPlWord>().HasKey(s => new { s.IdEnWord, s.IdPlWord });
+
+
         }
     }
 }
