@@ -7,8 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Abstractions\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj" />
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
   </ItemGroup>
 
 </Project>

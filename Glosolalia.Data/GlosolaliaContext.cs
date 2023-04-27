@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Glosolalia.Domain;
-using Glosolalia.entities;
+﻿using System.ComponentModel;
+using System.Configuration;
+using Core.Common.Contracts;
+using System.Runtime.Serialization;
+using Glosolalia.Buisness.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+
 
 namespace Glosolalia.Data
 {
-    public class GlosolaliaContext:DbContext
+    public class GlosolaliaContext : DbContext
     {
         public DbSet<PlWord> PlWords { get; set; }
         public DbSet<EnWord> EnWords { get; set; }
@@ -18,15 +19,19 @@ namespace Glosolalia.Data
         public DbSet<PartOfSpeech> PartsOfSpeech { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            ConnectionStringSettings settings =
+        ConfigurationManager.ConnectionStrings["GlosolaliaDB"];
             optionsBuilder.UseSqlServer(
-                "server = 127.0.0.1,1433; Database = Glosolalia; Trusted_Connection = True; Encrypt=False"
+                settings.ConnectionString
                 );
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<PropertyChangedEventHandler>();
+            modelBuilder.Ignore<ExtensionDataObject>();
+            modelBuilder.Ignore<IIdentifiableEntity>();
             modelBuilder.Entity<EnWordPlWord>().HasKey(s => new { s.IdEnWord, s.IdPlWord });
-
-
         }
     }
 }
+
