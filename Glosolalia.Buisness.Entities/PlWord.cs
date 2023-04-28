@@ -1,5 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Glosolalia.Buisness.Entities.Glosolalia.Buisness.Entities.Abstraction;
 
 namespace Glosolalia.Buisness.Entities
 {
