@@ -19,6 +19,7 @@ namespace Glosolalia.Data
         public DbSet<PartOfSpeech> PartsOfSpeech { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.LogTo(Console.WriteLine);
             ConnectionStringSettings settings =
         ConfigurationManager.ConnectionStrings["GlosolaliaDB"];
             optionsBuilder.UseSqlServer(
@@ -27,10 +28,12 @@ namespace Glosolalia.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Ignore<PropertyChangedEventHandler>();
             modelBuilder.Ignore<ExtensionDataObject>();
             modelBuilder.Ignore<IIdentifiableEntity>();
             modelBuilder.Entity<EnWordPlWord>().HasKey(s => new { s.IdEnWord, s.IdPlWord });
+            modelBuilder.Entity<EnWord>().Ignore(e => e.EntityId);
         }
     }
 }

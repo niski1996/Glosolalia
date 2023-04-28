@@ -12,19 +12,63 @@ namespace Core.Common.Data
         where T : class, IIdentifiableEntity, new()
         where U : DbContext, new()
     {
-        protected abstract T AddEntity(U entityContext, T entity);
 
-        protected abstract T UpdateEntity(U entityContext, T entity);
+        private DbSet<T> _getDbSetFromContext(U entityContext)
+            /*TODO
+             * reflection may cause slower work. May need changes. Example of repo in flatFinder
+             */
+        {
+            var dbSet = entityContext.GetType().GetProperties()
+            .FirstOrDefault(p => p.PropertyType == typeof(DbSet<T>));
+            if (dbSet == null)
+            {
+                throw new ArgumentException($"The type '{typeof(T).Name}' is not a valid entity in this context.");
+            }
+            return (DbSet<T>)dbSet.GetValue(entityContext);
+        }
+        protected virtual T AddEntity(U entityContext, T entity)
+        {
 
-        protected abstract IEnumerable<T> GetEntities(U entityContext);
+            var dbSet = _getDbSetFromContext(entityContext);
+            var tmp = dbSet.AsQueryable().ToQueryString();
+            var s = tmp.ToString();
 
-        protected abstract T GetEntity(U entityContext, int id);
+
+            return dbSet.Add(entity).Entity;
+        }
+
+        protected virtual T UpdateEntity(U entityContext, T entity)
+        {
+            var dbSet = _getDbSetFromContext(entityContext);
+            return (from e in dbSet
+                    where e.EntityId == entity.EntityId
+                    select e).FirstOrDefault(); }
+
+        protected virtual IEnumerable<T> GetEntities(U entityContext)
+        {
+            var dbSet = _getDbSetFromContext(entityContext);
+            return from e in dbSet
+                   select e;
+        }
+
+        protected virtual T GetEntity(U entityContext, int id)
+        {
+            var dbSet = _getDbSetFromContext(entityContext);
+            var query = (from e in dbSet
+                         where e.EntityId == id
+                         select e);
+
+            var results = query.FirstOrDefault();
+
+            return results;
+        }
 
         public T Add(T entity)
         {
             using (U entityContext = new U())
             {
                 T addedEntity = AddEntity(entityContext, entity);
+
                 entityContext.SaveChanges();
                 return addedEntity;
             }
