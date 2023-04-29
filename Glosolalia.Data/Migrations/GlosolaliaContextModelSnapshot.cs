@@ -22,110 +22,13 @@ namespace Glosolalia.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Glosolalia.Buisness.Entities.EnWordPlWord", b =>
-                {
-                    b.Property<int>("IdEnWord")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdPlWord")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EnWordId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("EnWordId1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PlWordId")
-                        .HasColumnType("int");
-
-                    b.HasKey("IdEnWord", "IdPlWord");
-
-                    b.HasIndex("EnWordId");
-
-                    b.HasIndex("EnWordId1");
-
-                    b.HasIndex("PlWordId");
-
-                    b.ToTable("EnWordPlWord");
-                });
-
-            modelBuilder.Entity("Glosolalia.Buisness.Entities.Language", b =>
+            modelBuilder.Entity("Glosolalia.Buisness.Entities.EnWord", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EntityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Languages");
-                });
-
-            modelBuilder.Entity("Glosolalia.Buisness.Entities.PartOfSpeech", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EntityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PartsOfSpeech");
-                });
-
-            modelBuilder.Entity("Glosolalia.Buisness.Entities.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EntityId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Value")
-                        .IsUnique();
-
-                    b.ToTable("Tags");
-                });
-
-            modelBuilder.Entity("Glosolalia.Buisness.Entities.Word", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EntityId")
-                        .HasColumnType("int");
 
                     b.Property<int>("LanguageId")
                         .HasColumnType("int");
@@ -156,41 +59,161 @@ namespace Glosolalia.Data.Migrations
                     b.HasIndex("Value")
                         .IsUnique();
 
-                    b.ToTable("Word");
-
-                    b.UseTptMappingStrategy();
+                    b.ToTable("EnWords");
                 });
 
-            modelBuilder.Entity("Glosolalia.Buisness.Entities.EnWord", b =>
+            modelBuilder.Entity("Glosolalia.Buisness.Entities.EnWordPlWord", b =>
                 {
-                    b.HasBaseType("Glosolalia.Buisness.Entities.Word");
+                    b.Property<int>("IdEnWord")
+                        .HasColumnType("int");
 
-                    b.ToTable("EnWords");
+                    b.Property<int>("IdPlWord")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EnWordId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PlWordId")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdEnWord", "IdPlWord");
+
+                    b.HasIndex("EnWordId");
+
+                    b.HasIndex("PlWordId");
+
+                    b.ToTable("EnWordPlWord");
+                });
+
+            modelBuilder.Entity("Glosolalia.Buisness.Entities.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Languages");
+                });
+
+            modelBuilder.Entity("Glosolalia.Buisness.Entities.PartOfSpeech", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Value")
+                        .IsUnique();
+
+                    b.ToTable("PartsOfSpeech");
                 });
 
             modelBuilder.Entity("Glosolalia.Buisness.Entities.PlWord", b =>
                 {
-                    b.HasBaseType("Glosolalia.Buisness.Entities.Word");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastInput")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("PartOfSpeechId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Progress")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
+
+                    b.HasIndex("LastInput");
+
+                    b.HasIndex("PartOfSpeechId");
+
+                    b.HasIndex("Progress");
+
+                    b.HasIndex("Value")
+                        .IsUnique();
 
                     b.ToTable("PlWords");
+                });
+
+            modelBuilder.Entity("Glosolalia.Buisness.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Value")
+                        .IsUnique();
+
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("Glosolalia.Buisness.Entities.EnWord", b =>
+                {
+                    b.HasOne("Glosolalia.Buisness.Entities.Language", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Glosolalia.Buisness.Entities.PartOfSpeech", "PartOfSpeech")
+                        .WithMany()
+                        .HasForeignKey("PartOfSpeechId");
+
+                    b.Navigation("Language");
+
+                    b.Navigation("PartOfSpeech");
                 });
 
             modelBuilder.Entity("Glosolalia.Buisness.Entities.EnWordPlWord", b =>
                 {
                     b.HasOne("Glosolalia.Buisness.Entities.EnWord", null)
-                        .WithMany("PlTrans77lation")
-                        .HasForeignKey("EnWordId");
-
-                    b.HasOne("Glosolalia.Buisness.Entities.EnWord", null)
                         .WithMany("PlTranslation")
-                        .HasForeignKey("EnWordId1");
+                        .HasForeignKey("EnWordId");
 
                     b.HasOne("Glosolalia.Buisness.Entities.PlWord", null)
                         .WithMany("EnTranslation")
                         .HasForeignKey("PlWordId");
                 });
 
-            modelBuilder.Entity("Glosolalia.Buisness.Entities.Word", b =>
+            modelBuilder.Entity("Glosolalia.Buisness.Entities.PlWord", b =>
                 {
                     b.HasOne("Glosolalia.Buisness.Entities.Language", "Language")
                         .WithMany()
@@ -209,26 +232,6 @@ namespace Glosolalia.Data.Migrations
 
             modelBuilder.Entity("Glosolalia.Buisness.Entities.EnWord", b =>
                 {
-                    b.HasOne("Glosolalia.Buisness.Entities.Word", null)
-                        .WithOne()
-                        .HasForeignKey("Glosolalia.Buisness.Entities.EnWord", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Glosolalia.Buisness.Entities.PlWord", b =>
-                {
-                    b.HasOne("Glosolalia.Buisness.Entities.Word", null)
-                        .WithOne()
-                        .HasForeignKey("Glosolalia.Buisness.Entities.PlWord", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Glosolalia.Buisness.Entities.EnWord", b =>
-                {
-                    b.Navigation("PlTrans77lation");
-
                     b.Navigation("PlTranslation");
                 });
 

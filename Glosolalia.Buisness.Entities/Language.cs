@@ -19,7 +19,6 @@ namespace Glosolalia.Buisness.Entities
         }
 
         [DataMember]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [DataMember]
         public string Name { get; set; }
@@ -29,6 +28,5 @@ namespace Glosolalia.Buisness.Entities
             set { Id = value; }
         }
     }
-
 
 }
