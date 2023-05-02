@@ -1,4 +1,5 @@
 using System.ComponentModel.Composition;
+using Core.Common.Contracts;
 using Core.Common.Core;
 using Glosolalia.Business.Bootstrapper;
 using Glosolalia.Business.Entities;
@@ -29,15 +30,15 @@ namespace Glosolalia.Data.Test
         }
 
 
-        //    [TestMethod]
-        //    public void test_repository_factory_usage()
-        //    {
-        //        RepositoryFactoryTestClass factoryTest = new RepositoryFactoryTestClass();
+        [TestMethod]
+        public void test_repository_factory_usage()
+        {
+            RepositoryFactoryTestClass factoryTest = new RepositoryFactoryTestClass();
 
-        //        IEnumerable<Car> cars = factoryTest.GetCars();
+            IEnumerable<PartOfSpeech> PartOfSpeechs = factoryTest.GetPartOfSpeechs();
 
-        //        Assert.IsTrue(cars != null);
-        //    }
+            Assert.IsTrue(PartOfSpeechs != null);
+        }
 
         [TestMethod]
         public void test_repository_mocking()
@@ -57,97 +58,96 @@ namespace Glosolalia.Data.Test
 
             Assert.IsTrue(ret == partsOfSpeech);
         }
-    }
-    //    }
 
-        //    [TestMethod]
-        //    public void test_factory_mocking1()
-        //    {
-        //        List<Car> cars = new List<Car>()
-        //        {
-        //            new Car() { CarId = 1, Description = "Mustang" },
-        //            new Car() { CarId = 2, Description = "Corvette" }
-        //        };
 
-        //        Mock<IDataRepositoryFactory> mockDataRepository = new Mock<IDataRepositoryFactory>();
-        //        mockDataRepository.Setup(obj => obj.GetDataRepository<ICarRepository>().Get()).Returns(cars);
-
-        //        RepositoryFactoryTestClass factoryTest = new RepositoryFactoryTestClass(mockDataRepository.Object);
-
-        //        IEnumerable<Car> ret = factoryTest.GetCars();
-
-        //        Assert.IsTrue(ret == cars);
-        //    }
-
-        //    [TestMethod]
-        //    public void test_factory_mocking2()
-        //    {
-        //        List<Car> cars = new List<Car>()
-        //        {
-        //            new Car() { CarId = 1, Description = "Mustang" },
-        //            new Car() { CarId = 2, Description = "Corvette" }
-        //        };
-
-        //        Mock<ICarRepository> mockCarRepository = new Mock<ICarRepository>();
-        //        mockCarRepository.Setup(obj => obj.Get()).Returns(cars);
-
-        //        Mock<IDataRepositoryFactory> mockDataRepository = new Mock<IDataRepositoryFactory>();
-        //        mockDataRepository.Setup(obj => obj.GetDataRepository<ICarRepository>()).Returns(mockCarRepository.Object);
-
-        //        RepositoryFactoryTestClass factoryTest = new RepositoryFactoryTestClass(mockDataRepository.Object);
-
-        //        IEnumerable<Car> ret = factoryTest.GetCars();
-
-        //        Assert.IsTrue(ret == cars);
-        //    }
-        //}
-
-    public class RepositoryTestClass
-    {
-        public RepositoryTestClass()
+        [TestMethod]
+        public void test_factory_mocking1()
         {
-            ObjectBase.Container.SatisfyImportsOnce(this);
+            List<PartOfSpeech> PartOfSpeechs = new List<PartOfSpeech>()
+                {
+                new PartOfSpeech() {Value = "dupa" },
+                new PartOfSpeech() {Value = "dupsko" }
+                };
+
+            Mock<IDataRepositoryFactory> mockDataRepository = new Mock<IDataRepositoryFactory>();
+            mockDataRepository.Setup(obj => obj.GetDataRepository<IPartOfSpeechRepository>().GetAll()).Returns(PartOfSpeechs);
+
+            RepositoryFactoryTestClass factoryTest = new RepositoryFactoryTestClass(mockDataRepository.Object);
+
+            IEnumerable<PartOfSpeech> ret = factoryTest.GetPartOfSpeechs();
+
+            Assert.IsTrue(ret == PartOfSpeechs);
         }
 
-        public RepositoryTestClass(IPartOfSpeechRepository partsOfSpeechRepository)
+        [TestMethod]
+        public void test_factory_mocking2()
         {
-            _PartOfSpeechRepository = partsOfSpeechRepository;
+            List<PartOfSpeech> PartOfSpeechs = new List<PartOfSpeech>()
+            {
+                new PartOfSpeech() { Value = "dupa" },
+                new PartOfSpeech() { Value = "dupsko" }
+            };
+
+            Mock<IPartOfSpeechRepository> mockPartOfSpeechRepository = new Mock<IPartOfSpeechRepository>();
+            mockPartOfSpeechRepository.Setup(obj => obj.GetAll()).Returns(PartOfSpeechs);
+
+            Mock<IDataRepositoryFactory> mockDataRepository = new Mock<IDataRepositoryFactory>();
+            mockDataRepository.Setup(obj => obj.GetDataRepository<IPartOfSpeechRepository>()).Returns(mockPartOfSpeechRepository.Object);
+
+            RepositoryFactoryTestClass factoryTest = new RepositoryFactoryTestClass(mockDataRepository.Object);
+
+            IEnumerable<PartOfSpeech> ret = factoryTest.GetPartOfSpeechs();
+
+            Assert.IsTrue(ret == PartOfSpeechs);
         }
 
-        [Import]
-        IPartOfSpeechRepository _PartOfSpeechRepository;
 
-        public IEnumerable<PartOfSpeech> GetPartOfSpeech()
+        public class RepositoryTestClass
         {
-            IEnumerable<PartOfSpeech> partsOfSpeech = _PartOfSpeechRepository.GetAll();
+            public RepositoryTestClass()
+            {
+                ObjectBase.Container.SatisfyImportsOnce(this);
+            }
 
-            return partsOfSpeech;
+            public RepositoryTestClass(IPartOfSpeechRepository partsOfSpeechRepository)
+            {
+                _PartOfSpeechRepository = partsOfSpeechRepository;
+            }
+
+            [Import]
+            IPartOfSpeechRepository _PartOfSpeechRepository;
+
+            public IEnumerable<PartOfSpeech> GetPartOfSpeech()
+            {
+                IEnumerable<PartOfSpeech> partsOfSpeech = _PartOfSpeechRepository.GetAll();
+
+                return partsOfSpeech;
+            }
+        }
+
+        public class RepositoryFactoryTestClass
+        {
+            public RepositoryFactoryTestClass()
+            {
+                ObjectBase.Container.SatisfyImportsOnce(this);
+            }
+
+            public RepositoryFactoryTestClass(IDataRepositoryFactory dataRepositoryFactory)
+            {
+                _DataRepositoryFactory = dataRepositoryFactory;
+            }
+
+            [Import]
+            IDataRepositoryFactory _DataRepositoryFactory;
+
+            public IEnumerable<PartOfSpeech> GetPartOfSpeechs()
+            {
+                IPartOfSpeechRepository PartOfSpeechRepository = _DataRepositoryFactory.GetDataRepository<IPartOfSpeechRepository>();
+
+                IEnumerable<PartOfSpeech> PartOfSpeechs = PartOfSpeechRepository.GetAll();
+
+                return PartOfSpeechs;
+            }
         }
     }
 }
-
-//    public class RepositoryFactoryTestClass
-//    {
-//        public RepositoryFactoryTestClass()
-//        {
-//            ObjectBase.Container.SatisfyImportsOnce(this);
-//        }
-
-//        public RepositoryFactoryTestClass(IDataRepositoryFactory dataRepositoryFactory)
-//        {
-//            _DataRepositoryFactory = dataRepositoryFactory;
-//        }
-
-//        [Import]
-//        IDataRepositoryFactory _DataRepositoryFactory;
-
-//        public IEnumerable<Car> GetCars()
-//        {
-//            ICarRepository carRepository = _DataRepositoryFactory.GetDataRepository<ICarRepository>();
-
-//            IEnumerable<Car> cars = carRepository.Get();
-
-//            return cars;
-//        }
-//    }
-//}

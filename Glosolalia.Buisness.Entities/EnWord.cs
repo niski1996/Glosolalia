@@ -8,8 +8,28 @@ namespace Glosolalia.Business.Entities
     {
         public EnWord()
         { }
+
+        public EnWord(string value) : base(value)
+        {
+        }
+        [NotMapped]
+        private List<PlWord> _plWords;
         [DataMember]
-        public List<PlWord> PlWords { get; set; }
+        public List<PlWord> PlWords 
+        {
+            get
+            {
+                if (_plWords is null)
+                {
+                    _plWords= new List<PlWord>();
+                }
+                return _plWords;
+            }
+            set
+            {
+                _plWords = value;
+            }
+        }
     }
 }
 

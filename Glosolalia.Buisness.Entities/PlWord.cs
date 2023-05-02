@@ -7,9 +7,32 @@ namespace Glosolalia.Business.Entities
     [Table("PlWords")]
     public class PlWord : Word
     {
-        [DataMember]
-        public List<EnWord> EnWords { get; set; }
+        public PlWord()
+        {
+            
+        }
+        public PlWord(string value) : base(value)
+        {
+        }
+        [NotMapped]
+        private List<EnWord> _enWords;
 
+        [DataMember]
+        public List<EnWord> EnWords 
+        { 
+            get
+            {
+                if (_enWords is null)
+                {
+                    _enWords = new List<EnWord>();
+                }
+                return _enWords;
+            }
+            set
+            {
+                _enWords = value;
+            }
+        }
 
     }
 

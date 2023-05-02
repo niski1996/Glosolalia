@@ -36,10 +36,12 @@ namespace Glosolalia.Data
             modelBuilder.Ignore<ExtensionDataObject>();
             modelBuilder.Ignore<IIdentifiableEntity>();
 
-            modelBuilder.Entity<Word>().HasIndex(e => e.Value).IsUnique();
-
-            modelBuilder.Entity<Word>().HasIndex(e => e.Progress);
-            modelBuilder.Entity<Word>().HasIndex(e => e.LastInput);
+            modelBuilder.Entity<EnWord>().HasIndex(e => e.Value).IsUnique();
+            modelBuilder.Entity<PlWord>().HasIndex(e => e.Value).IsUnique();
+            modelBuilder.Entity<EnWord>().HasIndex(e => e.Progress);
+            modelBuilder.Entity<PlWord>().HasIndex(e => e.Progress);
+            modelBuilder.Entity<EnWord>().HasIndex(e => e.LastInput);
+            modelBuilder.Entity<PlWord>().HasIndex(e => e.LastInput);
 
             modelBuilder.Entity<Tag>().HasIndex(e => e.Value).IsUnique();
 
