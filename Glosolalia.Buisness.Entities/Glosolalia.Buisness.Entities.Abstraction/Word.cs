@@ -4,7 +4,7 @@ using Core.Common.Contracts;
 using Core.Common.Core;
 using Microsoft.EntityFrameworkCore;
 
-namespace Glosolalia.Buisness.Entities
+namespace Glosolalia.Business.Entities
 {
     [DataContract]
     abstract public class Word : EntityBase, IIdentifiableEntity
@@ -13,15 +13,14 @@ namespace Glosolalia.Buisness.Entities
         {
             
         }
-        public Word(string value, Language language)
+        public Word(string value)
         {
             Value = value;
-            Language = language;
             LastInput = DateTime.Now;
             Progress = 0;
         }
-        public Word(string value, Language language, PartOfSpeech prt) :
-            this(value, language)
+        public Word(string value, PartOfSpeech prt) :
+            this(value)
         {
             PartOfSpeech = prt;
         }
@@ -30,13 +29,15 @@ namespace Glosolalia.Buisness.Entities
         [DataMember]
         public string Value { get; set; }
         [DataMember]
-        public Language Language { get; set; }
+        public int? PartOfSpeechId { get; set; }
         [DataMember]
         public PartOfSpeech? PartOfSpeech { get; set; }
         [DataMember]
         public DateTime LastInput { get; set; }
         [DataMember]
         public int Progress { get; set; }
+        [DataMember]
+        public List<Tag> Tags { get; set; }
         [NotMapped]
         public int EntityId
         {

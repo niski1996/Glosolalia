@@ -2,7 +2,7 @@
 using Core.Common.Contracts;
 using Core.Common.Core;
 
-namespace Glosolalia.Buisness.Entities
+namespace Glosolalia.Business.Entities
 {
     [DataContract]
     public class Tag: EntityBase, IIdentifiableEntity

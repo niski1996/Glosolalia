@@ -1,13 +1,12 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Collections.Generic;
-using Glosolalia.Buisness.Entities;
+using Glosolalia.Business.Entities;
 using Glosolalia.Data;
 
 internal class Program
 {
     private static void Main(string[] args)
-    {
-        loadNecesseryDB();
+    {;
     }
 
     static void Start()
@@ -23,7 +22,6 @@ internal class Program
         }
         else if (input=="d") 
         {
-            loadNecesseryDB();
         }
         else
         {
@@ -32,28 +30,10 @@ internal class Program
         
     }
 
-    private static void loadNecesseryDB()
-    {
-        addLang();
-        Console.WriteLine("Dostepne jezyki, wybierz numer");
-        int iter = 1;
-        var langList = loadLanguages();
-        foreach (var lan in langList)
-        {
-            Console.WriteLine($@"{iter}. {lan.Name}");
-        }
-       
-    }
 
-    private static void addLang()
-    {
-        new LanguageRepository().Add(new Language("turecki"));
-    }
 
-    private static List<Language> loadLanguages()
-    {
-        return  new LanguageRepository().GetAll().ToList();
-    }
+
+
 }
 
     

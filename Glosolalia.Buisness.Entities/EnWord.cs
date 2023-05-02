@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
-namespace Glosolalia.Buisness.Entities
+namespace Glosolalia.Business.Entities
 {
     [DataContract]
     public class EnWord : Word
@@ -9,7 +9,7 @@ namespace Glosolalia.Buisness.Entities
         public EnWord()
         { }
         [DataMember]
-        public List<EnWordPlWord> PlTranslation { get; set; }
+        public List<PlWord> PlWords { get; set; }
     }
 }
 

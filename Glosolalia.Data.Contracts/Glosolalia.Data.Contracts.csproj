@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj" />
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
+    <ProjectReference Include="..\Glosolalia.Buisness.Entities\Glosolalia.Business.Entities.csproj" />
   </ItemGroup>
 
 </Project>

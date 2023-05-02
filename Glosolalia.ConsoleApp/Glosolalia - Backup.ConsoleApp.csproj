@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Glosolalia.Buisness.Entities\Glosolalia.Business.Entities.csproj" />
+    <ProjectReference Include="..\Glosolalia.Business.Entities\Glosolalia.Business.Entities.csproj" />
     <ProjectReference Include="..\Glosolalia.Data\Glosolalia.Data.csproj" />
   </ItemGroup>
 

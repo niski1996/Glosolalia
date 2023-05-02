@@ -1,14 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
-namespace Glosolalia.Buisness.Entities
+namespace Glosolalia.Business.Entities
 {
     [DataContract]
     [Table("PlWords")]
     public class PlWord : Word
     {
         [DataMember]
-        public List<EnWordPlWord> EnTranslation { get; set; }
+        public List<EnWord> EnWords { get; set; }
+
+
     }
 
 

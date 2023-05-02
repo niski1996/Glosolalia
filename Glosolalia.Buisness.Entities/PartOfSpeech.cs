@@ -1,8 +1,9 @@
-﻿using System.Runtime.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
 
-namespace Glosolalia.Buisness.Entities
+namespace Glosolalia.Business.Entities
 {
     [DataContract]
     public class PartOfSpeech:EntityBase, IIdentifiableEntity
@@ -11,6 +12,7 @@ namespace Glosolalia.Buisness.Entities
         public int Id { get; set; }
         [DataMember]
         public string Value { get; set; }
+        [NotMapped]
         public int EntityId
         {
             get { return Id; }
