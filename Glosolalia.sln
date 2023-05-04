@@ -21,23 +21,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource Access", "Resource
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glosolalia.Data", "Glosolalia.Data\Glosolalia.Data.csproj", "{56C4D24D-2E0B-4B4E-8BE3-DCD1BA9748D4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntryPoints", "EntryPoints", "{B463D14F-551E-4A12-B3E3-14F85B3153A9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{B463D14F-551E-4A12-B3E3-14F85B3153A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glosolalia.Data.Contracts", "Glosolalia.Data.Contracts\Glosolalia.Data.Contracts.csproj", "{36E7C482-20C4-4462-9E7F-511947E08BCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glosolalia.Data.Contracts", "Glosolalia.Data.Contracts\Glosolalia.Data.Contracts.csproj", "{36E7C482-20C4-4462-9E7F-511947E08BCA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BC9EC4F6-F495-4636-BBFC-AF593E5F81CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glosolalia.Business.Bootstrapper", "Glosolalia.Business.Bootstrapper\Glosolalia.Business.Bootstrapper.csproj", "{F7B93327-4070-46B3-956C-8F8F3628C5E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glosolalia.Business.Bootstrapper", "Glosolalia.Business.Bootstrapper\Glosolalia.Business.Bootstrapper.csproj", "{F7B93327-4070-46B3-956C-8F8F3628C5E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{8AE6DC08-015F-464F-924D-A47E7EFED7D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{8AE6DC08-015F-464F-924D-A47E7EFED7D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glosolalia.Data.Test", "Test\Glosolalia.Data.Test.csproj", "{363783E5-049F-48DD-9650-0F2DB7AC967F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glosolalia.Data.Test", "Test\Glosolalia.Data.Test.csproj", "{363783E5-049F-48DD-9650-0F2DB7AC967F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glosolalia.Data.Test.tmp", "Glosolalia.Data.Test.tmp\Glosolalia.Data.Test.tmp.csproj", "{B58C4D52-D80B-4163-981D-1D92434EC248}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glosolalia.Data.Test.tmp", "Glosolalia.Data.Test.tmp\Glosolalia.Data.Test.tmp.csproj", "{B58C4D52-D80B-4163-981D-1D92434EC248}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adding", "Adding\Adding.csproj", "{DBC74338-753E-43DE-BF90-E02C0CDB004C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adding", "Adding\Adding.csproj", "{DBC74338-753E-43DE-BF90-E02C0CDB004C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wordadding", "Wordadding\Wordadding.csproj", "{BB1913CD-6D2A-4435-BF70-79139ECE08EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordadding", "Wordadding\Wordadding.csproj", "{BB1913CD-6D2A-4435-BF70-79139ECE08EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glosolalia.Mobile", "Glosolalia.Mobile\Glosolalia.Mobile.csproj", "{24B71A75-D1E8-4045-AF6F-223E77BC19D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,12 @@ Global
 		{BB1913CD-6D2A-4435-BF70-79139ECE08EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB1913CD-6D2A-4435-BF70-79139ECE08EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB1913CD-6D2A-4435-BF70-79139ECE08EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24B71A75-D1E8-4045-AF6F-223E77BC19D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24B71A75-D1E8-4045-AF6F-223E77BC19D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24B71A75-D1E8-4045-AF6F-223E77BC19D0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{24B71A75-D1E8-4045-AF6F-223E77BC19D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24B71A75-D1E8-4045-AF6F-223E77BC19D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24B71A75-D1E8-4045-AF6F-223E77BC19D0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,6 +118,7 @@ Global
 		{B58C4D52-D80B-4163-981D-1D92434EC248} = {BC9EC4F6-F495-4636-BBFC-AF593E5F81CB}
 		{DBC74338-753E-43DE-BF90-E02C0CDB004C} = {B463D14F-551E-4A12-B3E3-14F85B3153A9}
 		{BB1913CD-6D2A-4435-BF70-79139ECE08EB} = {B463D14F-551E-4A12-B3E3-14F85B3153A9}
+		{24B71A75-D1E8-4045-AF6F-223E77BC19D0} = {B463D14F-551E-4A12-B3E3-14F85B3153A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B29795C-8FFE-48FD-AB6E-AF5DB16A3A9C}
