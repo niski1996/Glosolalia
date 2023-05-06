@@ -5,6 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IEnWordRepository, EnWordRepository>();
+
+builder.Services.AddDbContext<GlosolaliaContext>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

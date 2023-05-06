@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel;
-using System.Configuration;
 using Core.Common.Contracts;
 using System.Runtime.Serialization;
-
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Glosolalia.Business.Entities;
+using Microsoft.Extensions.Configuration;
 
 namespace Glosolalia.Data
 {
@@ -17,16 +15,19 @@ namespace Glosolalia.Data
         public DbSet<PartOfSpeech> PartsOfSpeech { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
-        //    ConnectionStringSettings settings =
-        //ConfigurationManager.ConnectionStrings["GlosolaliaDB"];
-        //    optionsBuilder.UseSqlServer(
-        //        settings.ConnectionString
-        //        );            
-            optionsBuilder.UseSqlServer(
-                "server = 127.0.0.1,1433; Database = Glosolalia; Trusted_Connection = True; Encrypt=False"
-                );
-        }
+
+			IConfigurationRoot configuration = new ConfigurationBuilder()
+		.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+		.AddJsonFile("appsettings.json")
+		.Build();
+
+			string connectionString = configuration.GetConnectionString("GlosolaliaDB");//Todo try config in json, config in xml have problems to read constrings in tests
+
+			optionsBuilder.UseSqlServer(connectionString);
+			//optionsBuilder.UseSqlServer(
+			//    "server = 127.0.0.1,1433; Database = Glosolalia; Trusted_Connection = True; Encrypt=False"
+			//    );
+		}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<Word>();

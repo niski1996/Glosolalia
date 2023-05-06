@@ -3,11 +3,11 @@ using Glosolalia.Business.Entities;
 
 namespace Glosolalia.WEB.ViewModels
 {
-    public class PieListViewModel
+    public class EnWordListViewModel
     {
         public IEnumerable<EnWord> EnWordSet { get; }
 
-        public PieListViewModel(IEnumerable<EnWord> enWords)
+        public EnWordListViewModel(IEnumerable<EnWord> enWords)
         {
             EnWordSet = enWords;
         }
