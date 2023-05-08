@@ -6,6 +6,8 @@ using System.Runtime.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Glosolalia.Business.Entities;
+using Glosolalia.Business.Entities.Words;
+using Glosolalia.Business.Entities.Sentences;
 
 namespace Glosolalia.Data
 {
@@ -13,6 +15,10 @@ namespace Glosolalia.Data
     {
         public DbSet<PlWord> PlWords { get; set; }
         public DbSet<EnWord> EnWords { get; set; }
+        public DbSet<EsWord> EsWords { get; set; }
+        public DbSet<EsSentence> EsSentenceSet { get; set; }
+        public DbSet<PlSentence> PlSentenceSet { get; set; }
+        public DbSet<EnSentence> EnSentenceSet { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<PartOfSpeech> PartsOfSpeech { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -38,12 +44,26 @@ namespace Glosolalia.Data
 
             modelBuilder.Entity<EnWord>().HasIndex(e => e.Value).IsUnique();
             modelBuilder.Entity<PlWord>().HasIndex(e => e.Value).IsUnique();
+            modelBuilder.Entity<EsWord>().HasIndex(e => e.Value).IsUnique();
             modelBuilder.Entity<EnWord>().HasIndex(e => e.Progress);
+            modelBuilder.Entity<PlWord>().HasIndex(e => e.Progress);
             modelBuilder.Entity<PlWord>().HasIndex(e => e.Progress);
             modelBuilder.Entity<EnWord>().HasIndex(e => e.LastInput);
             modelBuilder.Entity<PlWord>().HasIndex(e => e.LastInput);
+            modelBuilder.Entity<EsWord>().HasIndex(e => e.LastInput);
 
-            modelBuilder.Entity<Tag>().HasIndex(e => e.Value).IsUnique();
+			modelBuilder.Entity<EsSentence>().HasIndex(e => e.Value).IsUnique();
+			modelBuilder.Entity<EsSentence>().HasIndex(e => e.Value).IsUnique();
+			modelBuilder.Entity<EsSentence>().HasIndex(e => e.Value).IsUnique();
+			modelBuilder.Entity<EsSentence>().HasIndex(e => e.Progress);
+			modelBuilder.Entity<EnSentence>().HasIndex(e => e.Progress);
+			modelBuilder.Entity<PlSentence>().HasIndex(e => e.Progress);
+			modelBuilder.Entity<EsSentence>().HasIndex(e => e.LastInput);
+			modelBuilder.Entity<EnSentence>().HasIndex(e => e.LastInput);
+			modelBuilder.Entity<PlSentence>().HasIndex(e => e.LastInput);
+
+
+			modelBuilder.Entity<Tag>().HasIndex(e => e.Value).IsUnique();
 
 
         }

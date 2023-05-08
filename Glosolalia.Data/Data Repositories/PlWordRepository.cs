@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.Composition;
-using Glosolalia.Business.Entities;
+using Glosolalia.Business.Entities.Words;
 using Glosolalia.Data.Contracts.Repository_Interface;
 
 namespace Glosolalia.Data

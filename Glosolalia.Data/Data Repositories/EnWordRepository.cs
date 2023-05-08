@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Common.Data;
-using Glosolalia.Business.Entities;
+using Glosolalia.Business.Entities.Words;
 using Glosolalia.Data.Contracts.Repository_Interface;
 using Microsoft.EntityFrameworkCore;
 

@@ -2,15 +2,15 @@
 using System.Runtime.Serialization;
 using Glosolalia.Common.Contracts;
 
-namespace Glosolalia.Business.Entities
+namespace Glosolalia.Business.Entities.Words
 {
     [DataContract]
     [Table("PlWords")]
-    public class PlWord : Word,IValue
+    public class PlWord : Word, IValue
     {
         public PlWord()
         {
-            
+
         }
         public PlWord(string value) : base(value)
         {
@@ -22,8 +22,8 @@ namespace Glosolalia.Business.Entities
         private List<EnWord> _enWords;
 
         [DataMember]
-        public List<EnWord> EnWords 
-        { 
+        public List<EnWord> EnWords
+        {
             get
             {
                 if (_enWords is null)
@@ -39,28 +39,28 @@ namespace Glosolalia.Business.Entities
         }
 
 
-		[NotMapped]
-		private List<EsWord> _esWords;
+        [NotMapped]
+        private List<EsWord> _esWords;
 
-		[DataMember]
-		public List<EsWord> EsWords
-		{
-			get
-			{
-				if (_enWords is null)
-				{
-					_esWords = new List<EsWord>();
-				}
-				return _esWords;
-			}
-			set
-			{
-				_esWords = value;
-			}
-		}
+        [DataMember]
+        public List<EsWord> EsWords
+        {
+            get
+            {
+                if (_enWords is null)
+                {
+                    _esWords = new List<EsWord>();
+                }
+                return _esWords;
+            }
+            set
+            {
+                _esWords = value;
+            }
+        }
 
 
-	}
+    }
 
 
 }

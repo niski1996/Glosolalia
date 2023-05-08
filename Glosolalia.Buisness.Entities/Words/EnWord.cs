@@ -2,10 +2,10 @@
 using System.Runtime.Serialization;
 using Glosolalia.Common.Contracts;
 
-namespace Glosolalia.Business.Entities
+namespace Glosolalia.Business.Entities.Words
 {
     [DataContract]
-    public class EnWord : Word, ITranslatable,IValue
+    public class EnWord : Word, ITranslatableWord, IValue
     {
         public EnWord()
         { }
@@ -16,13 +16,13 @@ namespace Glosolalia.Business.Entities
         [NotMapped]
         private List<PlWord> _plWords;
         [DataMember]
-        public List<PlWord> PlWords 
+        public List<PlWord> PlWords
         {
             get
             {
                 if (_plWords is null)
                 {
-                    _plWords= new List<PlWord>();
+                    _plWords = new List<PlWord>();
                 }
                 return _plWords;
             }
@@ -33,9 +33,9 @@ namespace Glosolalia.Business.Entities
             plWord.EnWords.Add(this);//should automatically add relations and avoid one side relations
         }
 
-		[DataMember]
-		public string Value { get; set; }
-	}
+        [DataMember]
+        public string Value { get; set; }
+    }
 }
 
 

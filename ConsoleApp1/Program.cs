@@ -1,5 +1,5 @@
 ﻿using Glosolalia.Business;
-using Glosolalia.Business.Entities;
+using Glosolalia.Business.Entities.Words;
 
 var tmp = new TranslationEngine();
 EnWord slaveWord;

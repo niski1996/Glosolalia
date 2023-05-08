@@ -1,13 +1,14 @@
 ﻿using Glosolalia.Business.Entities;
+using Glosolalia.Business.Entities.Words;
 using Glosolalia.Common.Contracts;
 
 namespace Glosolalia.Business
 {
-	public class TranslationEngine
+    public class TranslationEngine
 	{
 		public void WordsAlone<SlaveLanguageType>(out SlaveLanguageType slaveWord, out List<PlWord> translations,
 			string slaveValue, List<string> translationSet)
-			where SlaveLanguageType: ITranslatable,IValue, new()
+			where SlaveLanguageType: ITranslatableWord,IValue, new()
 		{
 			slaveWord = new SlaveLanguageType() { Value = slaveValue };
 			translations =new List<PlWord>();
@@ -19,7 +20,7 @@ namespace Glosolalia.Business
 			}
 			foreach (PlWord word in translations)
 			{
-				slaveWord.TranslationAding(word);
+				slaveWord.TranslationAding(word);//this should add translation to master word automatically
 			}
 
 
