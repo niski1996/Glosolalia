@@ -15,7 +15,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj" />
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
+    <ProjectReference Include="..\Glosolalia.Buisness.Entities\Glosolalia.Business.Entities.csproj" />
+    <ProjectReference Include="..\Glosolalia.Buisness\Glosolalia.Business.csproj" />
+    <ProjectReference Include="..\Glosolalia.Business.Bootstrapper\Glosolalia.Business.Bootstrapper.csproj" />
+    <ProjectReference Include="..\Glosolalia.Common.Contracts\Glosolalia.Common.Contracts.csproj" />
+    <ProjectReference Include="..\Glosolalia.Common\Glosolalia.Common.csproj" />
+    <ProjectReference Include="..\Glosolalia.Data.Contracts\Glosolalia.Data.Contracts.csproj" />
+    <ProjectReference Include="..\Glosolalia.Data.Test.tmp\Glosolalia.Data.Test.tmp.csproj" />
     <ProjectReference Include="..\Glosolalia.Data\Glosolalia.Data.csproj" />
+    <ProjectReference Include="..\Test\Glosolalia.Data.Test.csproj" />
   </ItemGroup>
 
 </Project>

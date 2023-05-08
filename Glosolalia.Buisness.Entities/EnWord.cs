@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
+using Glosolalia.Common.Contracts;
 
 namespace Glosolalia.Business.Entities
 {
     [DataContract]
-    public class EnWord : Word
+    public class EnWord : Word, ITranslatable,IValue
     {
         public EnWord()
         { }
@@ -25,12 +26,16 @@ namespace Glosolalia.Business.Entities
                 }
                 return _plWords;
             }
-            set
-            {
-                _plWords = value;
-            }
         }
-    }
+        public void TranslationAding(PlWord plWord)
+        {
+            _plWords.Add(plWord);
+            plWord.EnWords.Add(this);//should automatically add relations and avoid one side relations
+        }
+
+		[DataMember]
+		public string Value { get; set; }
+	}
 }
 
 
