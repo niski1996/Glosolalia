@@ -6,17 +6,9 @@ namespace Glosolalia.Business.Entities.Sentences
 	[DataContract]
 	public class PlSentence : Sentence
 	{
-		[DataMember]
-		public EnSentence EnSentence { get; set; }
-		[DataMember]
-		public EsSentence EsSentence { get; set; }
-		[DataMember]
-		private List<PlWord> _plWordSet;
-		[DataMember]
-		public List<PlWord> PlWordSet
-		{
-			get { return _plWordSet; }
-			set { _plWordSet = value; }
-		}
-	}
+        public List<PlWord> PlWordSet { get; set; }
+        public EnSentence EnTranslation { get; set; }
+        public EsSentence EsTranslation { get; set; }
+
+    }
 }

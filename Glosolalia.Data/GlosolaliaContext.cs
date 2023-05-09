@@ -13,7 +13,8 @@ namespace Glosolalia.Data
 {
     public class GlosolaliaContext : DbContext
     {
-        public DbSet<PlWord> PlWords { get; set; }
+        public DbSet<Sheet> SheetSet { get; set; }
+		public DbSet<PlWord> PlWords { get; set; }
         public DbSet<EnWord> EnWords { get; set; }
         public DbSet<EsWord> EsWords { get; set; }
         public DbSet<EsSentence> EsSentenceSet { get; set; }
@@ -62,8 +63,13 @@ namespace Glosolalia.Data
 			modelBuilder.Entity<EnSentence>().HasIndex(e => e.LastInput);
 			modelBuilder.Entity<PlSentence>().HasIndex(e => e.LastInput);
 
+            modelBuilder.Entity<PlWord>().Ignore(e => e.SheetSet);
+            modelBuilder.Entity<PlSentence>().Ignore(e => e.SheetSet);
+
 
 			modelBuilder.Entity<Tag>().HasIndex(e => e.Value).IsUnique();
+			modelBuilder.Entity<Sheet>().HasIndex(e => e.Name).IsUnique();
+			modelBuilder.Entity<PartOfSpeech>().HasIndex(e => e.Value).IsUnique();
 
 
         }

@@ -13,12 +13,7 @@ namespace Glosolalia.Business.Entities
 {
 	[DataContract]
 	public class Sentence: EntityBase, IIdentifiableEntity
-	{
-        public Sentence()
-        {
-            
-        }
-
+	{ 
         [DataMember]
 		public int Id { get; set; }
 		[DataMember]
@@ -36,7 +31,8 @@ namespace Glosolalia.Business.Entities
 			get { return Id; }
 			set { Id = value; }
 		}
+		[DataMember]
+        public List<Sheet> SheetSet { get; set; }
 
-
-	}
+    }
 }
