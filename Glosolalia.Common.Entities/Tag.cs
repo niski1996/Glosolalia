@@ -1,8 +1,10 @@
 ﻿using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
+using Glosolalia.Common.Contracts;
+using Glosolalia.Common.Entities.Sentences;
 
-namespace Glosolalia.Business.Entities
+namespace Glosolalia.Common.Entities
 {
     [DataContract]
     public class Tag: EntityBase, IIdentifiableEntity
@@ -16,7 +18,8 @@ namespace Glosolalia.Business.Entities
             get { return Id; }
             set { Id = value; }
         }
-    }
+
+	}
 
 
 }

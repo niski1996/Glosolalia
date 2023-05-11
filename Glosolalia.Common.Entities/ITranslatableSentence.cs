@@ -1,7 +1,6 @@
-﻿using Glosolalia.Business.Entities.Sentences;
-using Glosolalia.Business.Entities.Words;
+﻿using Glosolalia.Common.Entities.Sentences;
 
-namespace Glosolalia.Business.Entities
+namespace Glosolalia.Common.Entities
 {
     public interface ITranslatableSentence
 	{

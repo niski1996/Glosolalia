@@ -2,7 +2,7 @@
 using Glosolalia.Business.Entities.Words;
 using Glosolalia.Common.Contracts;
 
-namespace Glosolalia.Business.Entities.Sentences
+namespace Glosolalia.Common.Entities.Sentences
 {
 	[DataContract]
     public class EsSentence : Sentence<EsWord>//, ITranslatableSentence, IValue

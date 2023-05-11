@@ -4,10 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using Glosolalia.Business.Entities.Words;
 using Glosolalia.Common.Contracts;
 
-namespace Glosolalia.Business.Entities.Sentences
+namespace Glosolalia.Common.Entities
 {
 	[DataContract]
 	public class EnSentence : Sentence<EnWord>//, ITranslatableSentence, IValue

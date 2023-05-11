@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Glosolalia.Business.Entities.Words;
-
-namespace Glosolalia.Business.Entities
+﻿namespace Glosolalia.Common.Entities
 {
     public interface ITranslatableWord //HACK should be in Glosolalia.common.contract, but circular dependency
 	{

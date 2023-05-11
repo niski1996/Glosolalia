@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using Glosolalia.Business.Entities.Words;
 
-namespace Glosolalia.Business.Entities.Sentences
+namespace Glosolalia.Common.Entities.Sentences
 {
 	[DataContract]
 	public class PlSentence : Sentence<PlWord>

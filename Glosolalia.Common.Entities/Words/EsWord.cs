@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Glosolalia.Business.Entities.Sentences;
 using Glosolalia.Common.Contracts;
 
-namespace Glosolalia.Business.Entities.Words
+namespace Glosolalia.Common.Entities.Words
 {
     public class EsWord : Word<EsSentence>, ITranslatableWord, IValue
     {

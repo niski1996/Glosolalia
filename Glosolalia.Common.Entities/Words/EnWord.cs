@@ -1,16 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
-using Glosolalia.Business.Entities.Sentences;
 using Glosolalia.Common.Contracts;
 
-namespace Glosolalia.Business.Entities.Words
+namespace Glosolalia.Common.Entities
 {
     [DataContract]
     public class EnWord : Word<EnSentence>, ITranslatableWord, IValue
     {
-        public EnWord()
-        { }
-
         public EnWord(string value) : base(value)
         {
         }
