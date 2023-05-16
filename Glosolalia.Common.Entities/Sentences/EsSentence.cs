@@ -1,34 +1,13 @@
 ﻿using System.Runtime.Serialization;
-using Glosolalia.Business.Entities.Words;
+
 using Glosolalia.Common.Contracts;
 
-namespace Glosolalia.Common.Entities.Sentences
+namespace Glosolalia.Common.Entities
 {
 	[DataContract]
-    public class EsSentence : Sentence<EsWord>//, ITranslatableSentence, IValue
+    public class EsSentence : Sentence
     {
-        //[DataMember]
-        //public int PlSenttenceId { get; set; }
-        //private PlSentence _plSentence;
-        //[DataMember]
-        //public PlSentence PlSentence
-        //{
-        //    get { return _plSentence; }
-        //    set
-        //    {
-        //        _plSentence = value;
-        //        _plSentence.EsSentence = this;
-        //    }
-        //}
-        [DataMember]
-		public int PlSEstenceId { get; set; }
+		public PlSentence plSentence { get; set; }
 
-        private List<EsWord> _esWordSet;
-		[DataMember]
-		public List<EsWord> snWordSet
-        {
-            get { return _esWordSet; }
-            set { _esWordSet = value; }
-        }
-    }
+	}
 }

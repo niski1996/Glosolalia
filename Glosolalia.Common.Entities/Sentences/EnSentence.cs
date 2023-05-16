@@ -9,29 +9,9 @@ using Glosolalia.Common.Contracts;
 namespace Glosolalia.Common.Entities
 {
 	[DataContract]
-	public class EnSentence : Sentence<EnWord>//, ITranslatableSentence, IValue
+	public class EnSentence : Sentence
     {
-		//[DataMember]
-		//      public int PlSenttenceId { get; set; }
-		private PlSentence _plSentence;
-		[DataMember]
-		public PlSentence PlSentence
-		{
-			get { return _plSentence; }
-			set { _plSentence = value; }
-		}
-		[DataMember]
-		public int PlSentenceId { get; set; }
-		[DataMember]
-		private List<EnWord> _enWordSet;
-		[DataMember]
+		public PlSentence plSentence { get; set; }
 
-		public List<EnWord> EnWordSet
-        {
-            get { return _enWordSet; }
-            set { _enWordSet = value; }
-        }
-
-
-    }
+	}
 }

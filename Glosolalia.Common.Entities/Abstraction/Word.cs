@@ -5,19 +5,17 @@ using Glosolalia.Common.Contracts;
 
 namespace Glosolalia.Common.Entities
 {
-    public abstract class Word<TWordSet> :
-        EntityBase, IIdentifiableEntity, ISentenceSet<TWordSet>
-        where TWordSet : IWordSet<ISentenceSet<TWordSet>>
+    public abstract class Word : EntityBase, IIdentifiableEntity
 
     {
-        public Word(string value, PartOfSpeech prt = null, HashSet<TWordSet> sentenceSet = null, HashSet<Tag> tagSet = null)
+        public Word(string value, PartOfSpeech prt = null, HashSet<Sentence> sentenceSet = null, HashSet<Tag> tagSet = null)
         {
             Value = value;
             LastInput = DateTime.Now;
             Progress = 0;
             PartOfSpeech = prt;
 
-            if (!(_SentenceSet is null)) _SentenceSet = sentenceSet;
+            if (!(sentenceSet is null)) sentenceSet = sentenceSet;
 
             if (tagSet is null) Tags = new();
             else Tags = tagSet;
@@ -35,31 +33,7 @@ namespace Glosolalia.Common.Entities
             get { return Id; }
             set { Id = value; }
         }
-        private HashSet<TWordSet> _SentenceSet = new();
+        public HashSet<Sentence> sentenceSet = new();
 
-        public void AddSentence(TWordSet sentence)
-        {
-            _SentenceSet.Add(sentence);
-            if (!sentence.GetAllWords().Contains(this))
-            {
-                sentence.AddWord(this);
-            }
-        }
-
-        public IReadOnlySet<TWordSet> GetAllSenences()
-        {
-            IReadOnlySet<TWordSet> readOnly = _SentenceSet;
-
-            return readOnly;
-        }
-
-        public void RemoveSentence(TWordSet sentence)
-        {
-			_SentenceSet.Remove(sentence);
-			if (sentence.GetAllWords().Contains(this))
-			{
-				sentence.RemoveWord(this);
-			}
-		}
     }
 }

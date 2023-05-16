@@ -4,35 +4,16 @@ using Glosolalia.Common.Contracts;
 
 namespace Glosolalia.Common.Entities
 {
-    [DataContract]
-    public class EnWord : Word<EnSentence>, ITranslatableWord, IValue
-    {
-        public EnWord(string value) : base(value)
-        {
-        }
-        [NotMapped]
-        private List<PlWord> _plWords;
-        [DataMember]
-        public List<PlWord> PlWords
-        {
-            get
-            {
-                if (_plWords is null)
-                {
-                    _plWords = new List<PlWord>();
-                }
-                return _plWords;
-            }
-        }
-        public void TranslationAding(PlWord plWord)
-        {
-            _plWords.Add(plWord);
-            //plWord.EnWords.Add(this);//should automatically add relations and avoid one side relations
-        }
+	[DataContract]
+	public class EnWord : Word, IValue
+	{
 
-        [DataMember]
-        public string Value { get; set; }
-    }
+		public HashSet<PlWord> plWords = new();
+
+		public EnWord(string value, PartOfSpeech prt = null, HashSet<Sentence> sentenceSet = null, HashSet<Tag> tagSet = null) : base(value, prt, sentenceSet, tagSet)
+		{
+		}
+	}
 }
 
 

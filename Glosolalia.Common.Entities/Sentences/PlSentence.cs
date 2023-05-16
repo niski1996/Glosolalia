@@ -1,30 +1,12 @@
 ﻿using System.Runtime.Serialization;
-using Glosolalia.Business.Entities.Words;
 
-namespace Glosolalia.Common.Entities.Sentences
+namespace Glosolalia.Common.Entities
 {
 	[DataContract]
-	public class PlSentence : Sentence<PlWord>
+	public class PlSentence : Sentence
 	{
-
-
-		//public HashSet<PlWord> PlwordSet
-		//{
-		//	get { return _plWordSet; }
-		//	set { _plWordSet = value; }
-		//}
-
-		//[DataMember]
-		//public HashSet<PlWord> WordSet { get; set; }
-		//[DataMember]
-		//public EsSentence EsSentence { get; set; 
-		//[DataMember]
-		//protected HashSet<PlWord> WordSet
-		//{
-		//	get { return _WordSet; }
-		//	set { _WordSet = value; }
-		//}
-
+		public EnSentence enSentence { get; set; }
+		public EsSentence esSentence { get; set; }
 
 	}
 }
