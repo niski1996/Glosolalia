@@ -22,13 +22,13 @@ class Program
 			{
 	
 				string[] list = linia.Split('-');
-				Word spwrd = new Word() { Value = list[0].Trim(), LanguageId = 1 };
-				Word plwrd = new Word() { Value = list[0].Trim() };//, Language = l2 };
+				Word spwrd = new Word() { Value = list[0].Trim().ToLower(), LanguageId = 1 };
+				Word plwrd = new Word() { Value = list[1].Trim().ToLower(), LanguageId = 2 };
 				Translation translation = new Translation();
 				translation.LanguageSet = new();
 				translation.TranslatableSet= new();
 				WordRepository wr = new();
-				wr.Add(spwrd);
+				wr.Add(plwrd);
 				
 				//translation.LanguageSet.Add(l1);
 				//translation.LanguageSet.Add(l2);

@@ -29,7 +29,8 @@ namespace Glosolalia.Data
 			{
 				_logStream = new StreamWriter(loggerPath, append: true);
 			}
-			optionsBuilder.LogTo(_logStream.WriteLine);
+			optionsBuilder.LogTo(_logStream.WriteLine,
+				new[] {DbLoggerCategory.Database.Command.Name});//NOTE log only db query and stuff like that, there are others categorry, but make log massive
 
 
 			string connectionString = configuration.GetConnectionString("GlosolaliaDBDeveloper");//Todo try config in json, config in xml have problems to read constrings in tests
