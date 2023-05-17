@@ -5,15 +5,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Glosolalia.Common.Entities;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 
 namespace Glosolalia.Data
 {
 	public class GlosolaliaContext : DbContext
 	{
-		private StreamWriter _logStream; 
+		private StreamWriter _logStream { get; set; }
 		public DbSet<Translation> TranslationSet { get; set; }
 		public DbSet<Sheet> SheetSet { get; set; }
 		public DbSet<Word> Words { get; set; }
+		public DbSet<Language> LanguageSet { get; set; }
 		public DbSet<Tag> Tags { get; set; }
 		public DbSet<PartOfSpeech> PartsOfSpeech { get; set; }
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -30,7 +32,9 @@ namespace Glosolalia.Data
 				_logStream = new StreamWriter(loggerPath, append: true);
 			}
 			optionsBuilder.LogTo(_logStream.WriteLine,
-				new[] {DbLoggerCategory.Database.Command.Name});//NOTE log only db query and stuff like that, there are others categorry, but make log massive
+				new[] {DbLoggerCategory.Database.Command.Name }// log only db query and stuff like that, there are others categorry, but make log massive
+				,LogLevel.Information).
+				EnableSensitiveDataLogging();//show parametres field in loggs
 
 
 			string connectionString = configuration.GetConnectionString("GlosolaliaDBDeveloper");//Todo try config in json, config in xml have problems to read constrings in tests
@@ -69,34 +73,9 @@ namespace Glosolalia.Data
             modelBuilder.Ignore<ExtensionDataObject>();
             modelBuilder.Ignore<IIdentifiableEntity>();
 
-   //         modelBuilder.Entity<EnWord>().HasIndex(e => e.Value).IsUnique();
-   //         modelBuilder.Entity<PlWord>().HasIndex(e => e.Value).IsUnique();
-   //         modelBuilder.Entity<EsWord>().HasIndex(e => e.Value).IsUnique();
-   //         modelBuilder.Entity<EnWord>().HasIndex(e => e.Progress);
-   //         modelBuilder.Entity<PlWord>().HasIndex(e => e.Progress);
-   //         modelBuilder.Entity<PlWord>().HasIndex(e => e.Progress);
-   //         modelBuilder.Entity<EnWord>().HasIndex(e => e.LastInput);
-   //         modelBuilder.Entity<PlWord>().HasIndex(e => e.LastInput);
-   //         modelBuilder.Entity<EsWord>().HasIndex(e => e.LastInput);
-
-			//modelBuilder.Entity<EsSentence>().HasIndex(e => e.Value).IsUnique();
-			//modelBuilder.Entity<EsSentence>().HasIndex(e => e.Value).IsUnique();
-			//modelBuilder.Entity<EsSentence>().HasIndex(e => e.Value).IsUnique();
-			//modelBuilder.Entity<EsSentence>().HasIndex(e => e.Progress);
-			//modelBuilder.Entity<EnSentence>().HasIndex(e => e.Progress);
-			//modelBuilder.Entity<PlSentence>().HasIndex(e => e.Progress);
-			//modelBuilder.Entity<EsSentence>().HasIndex(e => e.LastInput);
-			//modelBuilder.Entity<EnSentence>().HasIndex(e => e.LastInput);
-			//modelBuilder.Entity<PlSentence>().HasIndex(e => e.LastInput);
-
-   //         modelBuilder.Entity<PlWord>().Ignore(e => e.SheetSet);
-   //         modelBuilder.Entity<PlSentence>().Ignore(e => e.SheetSet);
-
-
-			//modelBuilder.Entity<Tag>().HasIndex(e => e.Value).IsUnique();
-			//modelBuilder.Entity<Sheet>().HasIndex(e => e.Name).IsUnique();
-			//modelBuilder.Entity<PartOfSpeech>().HasIndex(e => e.Value).IsUnique();
-
+            modelBuilder.Entity<Sheet>().HasIndex(e => e.Name).IsUnique();
+            modelBuilder.Entity<Language>().HasIndex(e => e.Name).IsUnique();
+            modelBuilder.Entity<Word>().HasIndex(e => new {e.LanguageId,e.Value}).IsUnique();
 
         }
     }
