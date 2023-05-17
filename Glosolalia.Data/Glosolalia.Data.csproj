@@ -20,8 +20,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Glosolalia.Buisness.Entities\Glosolalia.Business.Entities.csproj" />
+    <ProjectReference Include="..\Glosolalia.Common.Entities\Glosolalia.Common.Entities.csproj" />
     <ProjectReference Include="..\Glosolalia.Data.Contracts\Glosolalia.Data.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

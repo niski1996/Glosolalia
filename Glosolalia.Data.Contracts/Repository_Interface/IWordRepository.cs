@@ -1,10 +1,10 @@
 ﻿
 using Core.Common.Contracts;
-using Glosolalia.Business.Entities;
+using Glosolalia.Common.Entities;
 
 namespace Glosolalia.Data.Contracts.Repository_Interface
 {
-    public interface IPlWordRepository: IDataRepository<PlWord>
+    public interface IWordRepository : IDataRepository<Word>
     {
     }
 }

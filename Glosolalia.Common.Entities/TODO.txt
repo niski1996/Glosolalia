@@ -1,0 +1,2 @@
+﻿trzeba zrobić bezpieczne podejscie do relacji  w klasach w tym momencie w miejscach  gdzie są relacjie wiele do wielu moge mieć osieroconie z jednej strony
+miałem podejscie do tego ale nie wyszlo, można sprawdzić na commitach commit 0613e137037bd9d3e2fe322696ecfa8678b468b8 

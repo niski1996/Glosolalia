@@ -1,7 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
+using Glosolalia.Business.Entities.Sentences;
+using Glosolalia.Common.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Glosolalia.Business.Entities
@@ -9,21 +12,7 @@ namespace Glosolalia.Business.Entities
     [DataContract]
     abstract public class Word : EntityBase, IIdentifiableEntity
     {
-        public Word()
-        {
-            
-        }
-        public Word(string value)
-        {
-            Value = value;
-            LastInput = DateTime.Now;
-            Progress = 0;
-        }
-        public Word(string value, PartOfSpeech prt) :
-            this(value)
-        {
-            PartOfSpeech = prt;
-        }
+
         [DataMember]
         public int Id { get; set; }
         [DataMember]
@@ -38,6 +27,8 @@ namespace Glosolalia.Business.Entities
         public int Progress { get; set; }
         [DataMember]
         public List<Tag> Tags { get; set; }
+        [DataMember]
+        public List<Sheet> SheetSet { get; set; }
         [NotMapped]
         public int EntityId
         {
@@ -47,6 +38,4 @@ namespace Glosolalia.Business.Entities
 
 
     }
-
-
 }

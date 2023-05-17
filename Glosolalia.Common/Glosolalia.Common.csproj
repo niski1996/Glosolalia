@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Composition" Version="7.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj" />
-    <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
     <ProjectReference Include="..\Glosolalia.Common.Contracts\Glosolalia.Common.Contracts.csproj" />
   </ItemGroup>
 
