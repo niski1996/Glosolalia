@@ -11,7 +11,16 @@ namespace Glosolalia.Data
 {
 	public class GlosolaliaContext : DbContext
 	{
-		private StreamWriter _logStream { get; set; }
+        public GlosolaliaContext()
+        {
+            
+        }
+        public GlosolaliaContext(DbContextOptions<GlosolaliaContext> options)
+			: base(options)
+        {
+            
+        }
+        private StreamWriter _logStream { get; set; }
 		public DbSet<Translation> TranslationSet { get; set; }
 		public DbSet<Sheet> SheetSet { get; set; }
 		public DbSet<Word> Words { get; set; }
@@ -20,26 +29,30 @@ namespace Glosolalia.Data
 		public DbSet<PartOfSpeech> PartsOfSpeech { get; set; }
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-
-			IConfigurationRoot configuration = new ConfigurationBuilder()
-		.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-		.AddJsonFile("appsettings.json")
-		.Build();
-
-			string loggerPath = configuration.GetSection("Logging:SQLLogger").Value ?? "";
-			if (_logStream is null)
+			if (!optionsBuilder.IsConfigured)
 			{
-				_logStream = new StreamWriter(loggerPath, append: true);
+
+
+				IConfigurationRoot configuration = new ConfigurationBuilder()
+			.SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+			.AddJsonFile("appsettings.json")
+			.Build();
+
+				string loggerPath = configuration.GetSection("Logging:SQLLogger").Value ?? "";
+				if (_logStream is null)
+				{
+					_logStream = new StreamWriter(loggerPath, append: true);
+				}
+				optionsBuilder.LogTo(_logStream.WriteLine,
+					new[] { DbLoggerCategory.Database.Command.Name }// log only db query and stuff like that, there are others categorry, but make log massive
+					, LogLevel.Information).
+					EnableSensitiveDataLogging();//show parametres field in loggs
+
+
+				string connectionString = configuration.GetConnectionString("GlosolaliaDBDeveloper");//Todo try config in json, config in xml have problems to read constrings in tests
+
+				optionsBuilder.UseSqlServer(connectionString);
 			}
-			optionsBuilder.LogTo(_logStream.WriteLine,
-				new[] {DbLoggerCategory.Database.Command.Name }// log only db query and stuff like that, there are others categorry, but make log massive
-				,LogLevel.Information).
-				EnableSensitiveDataLogging();//show parametres field in loggs
-
-
-			string connectionString = configuration.GetConnectionString("GlosolaliaDBDeveloper");//Todo try config in json, config in xml have problems to read constrings in tests
-
-			optionsBuilder.UseSqlServer(connectionString);
 
 
 			//optionsBuilder.LogTo()
