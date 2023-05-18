@@ -10,4 +10,9 @@
     <ProjectReference Include="..\Glosolalia.Data\Glosolalia.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
+
 </Project>
