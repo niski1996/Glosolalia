@@ -4,6 +4,7 @@ using Glosolalia.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Glosolalia.Data.Migrations
 {
     [DbContext(typeof(GlosolaliaContext))]
-    partial class GlosolaliaContextModelSnapshot : ModelSnapshot
+    [Migration("20230517032431_kutas")]
+    partial class kutas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +42,7 @@ namespace Glosolalia.Data.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("LanguageSet");
+                    b.ToTable("Language");
                 });
 
             modelBuilder.Entity("Glosolalia.Common.Entities.PartOfSpeech", b =>

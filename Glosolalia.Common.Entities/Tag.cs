@@ -10,7 +10,7 @@ namespace Glosolalia.Common.Entities
     {
         public int Id { get; set; }
         public string Value { get; set; }
-        public HashSet<Translation> TranslationSet { get; set; }
+        public List<Translation> TranslationSet { get; set; }
 		public int EntityId
         {
             get { return Id; }
