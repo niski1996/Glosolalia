@@ -80,6 +80,7 @@ namespace Glosolalia.Data
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Ignore<IIdentifiableEntity>();
 
             modelBuilder.Ignore<PropertyChangedEventHandler>();
@@ -90,6 +91,7 @@ namespace Glosolalia.Data
             modelBuilder.Entity<Language>().HasIndex(e => e.Name).IsUnique();
             modelBuilder.Entity<Word>().HasIndex(e => new {e.LanguageId,e.Value}).IsUnique();
 
+			modelBuilder.Entity<Translation>().Navigation(e => e.TranslatableSet).AutoInclude();
         }
     }
 }
