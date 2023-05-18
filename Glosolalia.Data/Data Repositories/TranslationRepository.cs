@@ -5,8 +5,9 @@ using Glosolalia.Data.Contracts.Repository_Interface;
 
 namespace Glosolalia.Data
 {
+	[Export(typeof(ITranslationRepository))]
 	[PartCreationPolicy(CreationPolicy.NonShared)]
-	public class TranslationRepository : DataRepositoryBase<Translation> { }
+	public class TranslationRepository : DataRepositoryBase<Translation>, ITranslationRepository { }
 
 
 }

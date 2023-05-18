@@ -68,16 +68,17 @@ namespace Glosolalia.Data
             modelBuilder.Ignore<PropertyChangedEventHandler>();
             modelBuilder.Ignore<ExtensionDataObject>();
             modelBuilder.Ignore<IIdentifiableEntity>();
+			modelBuilder.Entity<Translation>().Navigation(e => e.TranslatableSet).AutoInclude();
 
-   //         modelBuilder.Entity<EnWord>().HasIndex(e => e.Value).IsUnique();
-   //         modelBuilder.Entity<PlWord>().HasIndex(e => e.Value).IsUnique();
-   //         modelBuilder.Entity<EsWord>().HasIndex(e => e.Value).IsUnique();
-   //         modelBuilder.Entity<EnWord>().HasIndex(e => e.Progress);
-   //         modelBuilder.Entity<PlWord>().HasIndex(e => e.Progress);
-   //         modelBuilder.Entity<PlWord>().HasIndex(e => e.Progress);
-   //         modelBuilder.Entity<EnWord>().HasIndex(e => e.LastInput);
-   //         modelBuilder.Entity<PlWord>().HasIndex(e => e.LastInput);
-   //         modelBuilder.Entity<EsWord>().HasIndex(e => e.LastInput);
+			//         modelBuilder.Entity<EnWord>().HasIndex(e => e.Value).IsUnique();
+			//         modelBuilder.Entity<PlWord>().HasIndex(e => e.Value).IsUnique();
+			//         modelBuilder.Entity<EsWord>().HasIndex(e => e.Value).IsUnique();
+			//         modelBuilder.Entity<EnWord>().HasIndex(e => e.Progress);
+			//         modelBuilder.Entity<PlWord>().HasIndex(e => e.Progress);
+			//         modelBuilder.Entity<PlWord>().HasIndex(e => e.Progress);
+			//         modelBuilder.Entity<EnWord>().HasIndex(e => e.LastInput);
+			//         modelBuilder.Entity<PlWord>().HasIndex(e => e.LastInput);
+			//         modelBuilder.Entity<EsWord>().HasIndex(e => e.LastInput);
 
 			//modelBuilder.Entity<EsSentence>().HasIndex(e => e.Value).IsUnique();
 			//modelBuilder.Entity<EsSentence>().HasIndex(e => e.Value).IsUnique();
@@ -89,8 +90,8 @@ namespace Glosolalia.Data
 			//modelBuilder.Entity<EnSentence>().HasIndex(e => e.LastInput);
 			//modelBuilder.Entity<PlSentence>().HasIndex(e => e.LastInput);
 
-   //         modelBuilder.Entity<PlWord>().Ignore(e => e.SheetSet);
-   //         modelBuilder.Entity<PlSentence>().Ignore(e => e.SheetSet);
+			//         modelBuilder.Entity<PlWord>().Ignore(e => e.SheetSet);
+			//         modelBuilder.Entity<PlSentence>().Ignore(e => e.SheetSet);
 
 
 			//modelBuilder.Entity<Tag>().HasIndex(e => e.Value).IsUnique();
@@ -98,7 +99,7 @@ namespace Glosolalia.Data
 			//modelBuilder.Entity<PartOfSpeech>().HasIndex(e => e.Value).IsUnique();
 
 
-        }
+		}
     }
 }
 
