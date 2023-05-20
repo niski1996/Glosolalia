@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Core.Common.Contracts": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57421;http://localhost:57422"
+    }
+  }
+}
