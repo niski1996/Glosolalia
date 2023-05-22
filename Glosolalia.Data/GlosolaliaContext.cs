@@ -86,7 +86,8 @@ namespace Glosolalia.Data
             modelBuilder.Ignore<PropertyChangedEventHandler>();
             modelBuilder.Ignore<ExtensionDataObject>();
             modelBuilder.Ignore<IIdentifiableEntity>();
-			modelBuilder.Entity<Translation>().Navigation(e => e.TranslatableSet).AutoInclude();
+			modelBuilder.Entity<Translation>().Navigation(e => e.TranslatableFrom).AutoInclude();
+			modelBuilder.Entity<Translation>().Navigation(e => e.TranslatableTo).AutoInclude();
 
             modelBuilder.Entity<Sheet>().HasIndex(e => e.Name).IsUnique();
             modelBuilder.Entity<Language>().HasIndex(e => e.Name).IsUnique();

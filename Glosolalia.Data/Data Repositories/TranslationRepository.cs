@@ -41,7 +41,7 @@ namespace Glosolalia.Data
 		{
 			using (GlosolaliaContext entityContext = new())
 			{
-				_addWordsToTrackingIfExisting(entityContext, entity.TranslatableSet);
+				_addWordsToTrackingIfExisting(entityContext, new List<Word> { entity.TranslatableTo,entity.TranslatableFrom});
 				Translation addedEntity = AddEntity(entityContext, entity);
 
 				entityContext.SaveChanges();

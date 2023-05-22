@@ -1,0 +1,35 @@
+﻿@model FlashCardsViewModel
+
+<div class="Word-List">
+	list
+</div>
+<div class="Flashcard-Word">
+	@Model.TransList[Model.ActualTargetIndex].TranslatableTo.Value
+</div>
+<div>
+    @if (Model.ActualTargetIndex > 0)
+    {
+            <form asp-controller="Item" asp-action="Previous" method="get">
+                <button type="submit">Previous</button>
+            </form>
+    }
+
+    @if (Model.ActualTargetIndex < Model.TransList.Count() - 1)
+    {
+                <form asp-controller="FlashcardsShow" asp-action="Next">
+                <button type="submit">Check</button>
+            </form>
+    }
+</div>
+<div class="Flashcard-Word">
+	Translation
+</div>
+<div class="Word-Insert">
+	<input type="text" placeholder="Insert Word...">
+</div>
+<div class="Words-Navi">
+	<button type="button">next</button>
+</div>
+<div class="Words-Navi">
+	<button type="button">prev</button>
+</div>

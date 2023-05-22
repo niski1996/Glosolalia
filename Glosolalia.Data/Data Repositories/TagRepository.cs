@@ -4,7 +4,7 @@ using Glosolalia.Data.Contracts.Repository_Interface;
 
 namespace Glosolalia.Data
 {
-	[Export(typeof(ITagRepository))]
+    [Export(typeof(ITagRepository))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TagRepository : DataRepositoryBase<Tag>, ITagRepository
     {

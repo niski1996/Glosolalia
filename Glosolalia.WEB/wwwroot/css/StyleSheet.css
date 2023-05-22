@@ -1,0 +1,66 @@
+﻿/* Zmienne kolorów */
+:root {
+    --primary-color: #633b00;
+    --secondary-color: #3fedf3;
+    --text-color: #fff;
+}
+
+/* Resetowanie styli dla elementów */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.top-navbar {
+    background-color: var(--secondary-color);
+    padding: 10px 0;
+}
+
+.container-xl {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+#logo {
+    font-size: 24px;
+    color: var(--text-color);
+}
+
+#search {
+    margin-left: auto;
+}
+
+    #search input[type="text"] {
+        padding: 5px;
+        width: 200px;
+        border: none;
+        border-radius: 5px;
+    }
+
+#account {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.top-nav-butt-direct {
+    justify-content: center;
+}
+
+    .top-nav-butt-direct button {
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+/* Dodatkowe style, które mus

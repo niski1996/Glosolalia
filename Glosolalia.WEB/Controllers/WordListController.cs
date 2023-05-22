@@ -1,12 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Glosolalia.Common.Entities;
+using Glosolalia.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Glosolalia.WEB.Controllers
 {
 	public class WordListController : Controller
 	{
-		public IActionResult Index()
+		private readonly ITranslationRepository _TranslationRepository;
+        public WordListController(ITranslationRepository _translationRepository)
+        {
+            _TranslationRepository= _translationRepository ?? throw new ArgumentNullException(nameof(_TranslationRepository));
+        }
+        public IActionResult AllWordsInLanguageList()
 		{
-			return View();
+			//WordsInLanguageListViewModel wordsInLanguageListViewModel=new WordsInLanguageListViewModel(_TranslationRepository.GetAll())
+
+
+			return View(_TranslationRepository.GetAll());
 		}
 	}
+
+	//internal class WordsInLanguageListViewModel
+	//{
+	//	private IEnumerable<Translation> enumerable;
+
+	//	public WordsInLanguageListViewModel()//IEnumerable<Translation> enumerable)
+	//	{
+	//		this.enumerable = enumerable;
+	//	}
+	//}
 }

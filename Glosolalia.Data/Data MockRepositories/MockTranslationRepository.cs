@@ -17,11 +17,8 @@ namespace Glosolalia.Data.Data_MockRepositories
 			return (new Translation()
 			{
 				Id = 1,
-				TranslatableSet = new() {
-					new Word("trial",1)
-					,new Word("triallo",2)
-				}
-
+				TranslatableFrom = new Word("tr", 1),
+				TranslatableTo = new Word("triallo", 2)
 			});
 		}
 
@@ -31,21 +28,37 @@ namespace Glosolalia.Data.Data_MockRepositories
 							new Translation()
 							{
 								Id = 1,
-								TranslatableSet = new() {
-					new Word("trial",1)
-					,new Word("triallo",2)
-				} }
+								TranslatableFrom = new Word("kot", 1),
+								TranslatableTo = new Word("cat", 2) }
 							,new Translation()
 							{
-								Id = 1,
-								TranslatableSet = new() {
-					new Word("kutas",1)
-					,new Word("dicco",2)
-				}, }});
+								Id = 2,
+								TranslatableFrom = new Word("dom", 1),
+								TranslatableTo = new Word("house", 2) }
+							,new Translation()
+							{
+								Id = 3,
+								TranslatableFrom = new Word("droga", 1),
+								TranslatableTo = new Word("road", 2) }
+							,new Translation()
+							{
+								Id = 4,
+								TranslatableFrom = new Word("krzesło", 1),
+								TranslatableTo = new Word("chair", 2) }
+							,new Translation()
+							{
+								Id = 10,
+								TranslatableFrom = new Word("mysz", 1),
+								TranslatableTo = new Word("mouse", 2) }
+							,new Translation()
+							{
+								Id = 199,
+								TranslatableFrom = new Word("pies", 1),
+								TranslatableTo = new Word("dog", 2)}, });
 
-								
 
-							
+
+
 		}
 
 		public void Remove(Translation entity)
