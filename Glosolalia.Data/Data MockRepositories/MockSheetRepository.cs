@@ -10,14 +10,23 @@ namespace Glosolalia.Data.Data_MockRepositories
 {
     public class MockSheetRepository : ISheetRepository
     {
-        public Sheet Add(Sheet entity)
+		
+
+		public Sheet Add(Sheet entity)
         {
             throw new NotImplementedException();
         }
 
         public Sheet Get(int id)
         {
-            throw new NotImplementedException();
+
+			IEnumerable<Translation> tmp = new MockTranslationRepository().GetAll();
+            return (new Sheet("jonasz")
+            {
+                Id = 1
+                ,
+                TranslationSet = tmp.ToList()
+            }) ;
         }
 
         public IEnumerable<Sheet> GetAll()

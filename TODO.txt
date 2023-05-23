@@ -1,0 +1,1 @@
+gitignore nie zawiera plików od razr, mvc i blazor

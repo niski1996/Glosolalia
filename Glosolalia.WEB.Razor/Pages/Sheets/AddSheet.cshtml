@@ -1,0 +1,18 @@
+﻿@page "Sheet/Add"
+@model Glosolalia.WEB.Razor.Pages.Sheets.AddSheetModel
+@{
+}
+<h1>Add new Sheet</h1>
+
+<div>
+	<div>
+		<form method="post" asp-page="AddSheet">
+			<div asp-validation-summary="All"></div>
+			<div>
+				<label asp-for="NewSheet.Name">Name</label>
+				<input asp-for="NewSheet.Name"/>
+			</div>
+			<button class="btn btn-success">Create</button>
+		</form>
+	</div>
+</div>

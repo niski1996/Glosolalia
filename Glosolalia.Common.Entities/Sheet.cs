@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 
@@ -18,6 +19,8 @@ namespace Glosolalia.Common.Entities
         }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
+		[Required]
+		[MinLength(2,ErrorMessage = "Łooo kurwa za krótki")]
         public string Name { get; set; }
 		public List<Translation> TranslationSet{ get; set; }
 		[NotMapped]

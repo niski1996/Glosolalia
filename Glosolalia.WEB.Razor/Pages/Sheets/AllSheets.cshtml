@@ -1,8 +1,22 @@
-﻿@page
+﻿@page "/Sheets/All" 
+@*dupa nie musze zmienieć tag helperów, sam asp to jakoś ogarnie XD*@
 @model Glosolalia.WEB.Razor.Pages.Sheets.AllSheetsModel
 @{
     ViewData["Title"] = "AllSheets";
 }
-<div>kutas
-    dupa
+<div>
+    <table>
+        @foreach (Sheet sheet in Model.SheetList)
+        {
+            <tr>
+                <td>@sheet.Name
+                        <a asp-area="" asp-page="/Sheets/Details" asp-route-id="@sheet.Id">
+                        <button class="btn btn-success">Details</button>
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+        <a class="nav-link text-dark" asp-area="" asp-page="/Sheets/AllSheets">Sheets</a>
+    <a asp-area="" asp-page="/Sheets/AddSheet"><button class="btn btn-success">Add</button></a>
 </div>

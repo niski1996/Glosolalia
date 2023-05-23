@@ -1,0 +1,16 @@
+﻿@page "/Sheet/Details/{id:int}"
+@model Glosolalia.WEB.Razor.Pages.Sheets.DetailsModel
+@{
+	ViewData["Title"] = "Details";
+}
+<div>Arkusz  z id @RouteData.Values["id"]</div>
+<table>
+	@foreach (Translation item in Model.ActualSheet.TranslationSet)
+	{
+		<tr>
+			<td>@item.TranslatableFrom.Value</td>
+			<td>@item.TranslatableTo.Value</td>
+		</tr>
+		
+	}
+</table>
