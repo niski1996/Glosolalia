@@ -1,5 +1,6 @@
 ﻿using Glosolalia.Common.Entities;
 using Glosolalia.Data;
+using Glosolalia.Data.Contracts.Repository_Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Glosolalia.WEB.Controllers
