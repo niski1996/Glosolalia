@@ -13,7 +13,12 @@ namespace Glosolalia.Data.Data_MockRepositories
 			throw new NotImplementedException();
 		}
 
-		public Translation Get(int id)
+        public Translation Add(Translation entity, GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Translation Get(int id)
 		{
 			return (new Translation()
 			{
@@ -23,7 +28,12 @@ namespace Glosolalia.Data.Data_MockRepositories
 			});
 		}
 
-		public IEnumerable<Translation> GetAll()
+        public Translation Get(int id, GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Translation> GetAll()
 		{
 			return (new List<Translation>() {
 							new Translation()
@@ -62,7 +72,12 @@ namespace Glosolalia.Data.Data_MockRepositories
 
 		}
 
-		public void Remove(Translation entity)
+        public IEnumerable<Translation> GetAll(GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Translation entity)
 		{
 			throw new NotImplementedException();
 		}
@@ -72,9 +87,24 @@ namespace Glosolalia.Data.Data_MockRepositories
 			throw new NotImplementedException();
 		}
 
-		public Translation Update(Translation entity)
+        public void Remove(Translation entity, GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int id, GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Translation Update(Translation entity)
 		{
 			throw new NotImplementedException();
 		}
-	}
+
+        public Translation Update(Translation entity, GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

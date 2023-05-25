@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Glosolalia.WEB", "Glosolali
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glosolalia.WEB.Razor", "Glosolalia.WEB.Razor\Glosolalia.WEB.Razor.csproj", "{A53106BD-A1BC-43F6-B102-E3EA65A4E8C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Glosolalia.API", "Glosolalia.API\Glosolalia.API.csproj", "{6A4588AC-11E0-45F6-A1F1-9668AB07690C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,10 @@ Global
 		{A53106BD-A1BC-43F6-B102-E3EA65A4E8C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A53106BD-A1BC-43F6-B102-E3EA65A4E8C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A53106BD-A1BC-43F6-B102-E3EA65A4E8C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A4588AC-11E0-45F6-A1F1-9668AB07690C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A4588AC-11E0-45F6-A1F1-9668AB07690C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A4588AC-11E0-45F6-A1F1-9668AB07690C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A4588AC-11E0-45F6-A1F1-9668AB07690C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +127,7 @@ Global
 		{556111A7-A364-48ED-8574-9AAE6D134E17} = {5927BC4D-E72D-4277-A380-0664EA5125D4}
 		{F79AC671-999B-4478-A013-A113A7D5F81A} = {B463D14F-551E-4A12-B3E3-14F85B3153A9}
 		{A53106BD-A1BC-43F6-B102-E3EA65A4E8C0} = {B463D14F-551E-4A12-B3E3-14F85B3153A9}
+		{6A4588AC-11E0-45F6-A1F1-9668AB07690C} = {BBF0B6B4-10C4-4B97-B284-34FC709FAAF8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3B29795C-8FFE-48FD-AB6E-AF5DB16A3A9C}

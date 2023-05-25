@@ -17,6 +17,11 @@ namespace Glosolalia.Data.Data_MockRepositories
             throw new NotImplementedException();
         }
 
+        public Sheet Add(Sheet entity, GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+
         public Sheet Get(int id)
         {
 
@@ -29,6 +34,11 @@ namespace Glosolalia.Data.Data_MockRepositories
             }) ;
         }
 
+        public Sheet Get(int id, GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Sheet> GetAll()
         {
             return (new List<Sheet> {
@@ -36,6 +46,11 @@ namespace Glosolalia.Data.Data_MockRepositories
             Id=1}
             ,new Sheet("zachariasz"){Id=3}
             ,new Sheet("rut"){Id=7 }});
+        }
+
+        public IEnumerable<Sheet> GetAll(GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Translation> GetWords(int sheetId)
@@ -53,7 +68,22 @@ namespace Glosolalia.Data.Data_MockRepositories
             throw new NotImplementedException();
         }
 
+        public void Remove(Sheet entity, GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove(int id, GlosolaliaContext context)
+        {
+            throw new NotImplementedException();
+        }
+
         public Sheet Update(Sheet entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Sheet Update(Sheet entity, GlosolaliaContext context)
         {
             throw new NotImplementedException();
         }

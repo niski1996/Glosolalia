@@ -8,15 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Common.Data
 {
-    public abstract class DataRepositoryBase<T, U> : IDataRepository<T>
+    public abstract class DataRepositoryBase<T, U> : IDataRepository<T, U>
         where T : class, IIdentifiableEntity, new()
         where U : DbContext, new()
     {
-
+        #region private and protected methods
         private DbSet<T> _getDbSetFromContext(U entityContext)
-            /*TODO
-             * reflection may cause slower work. May need changes. Example of repo in flatFinder
-             */
+        /*TODO
+         * reflection may cause slower work. May need changes. Example of repo in flatFinder
+         */
         {
             var dbSet = entityContext.GetType().GetProperties()
             .FirstOrDefault(p => p.PropertyType == typeof(DbSet<T>));
@@ -42,7 +42,8 @@ namespace Core.Common.Data
             var dbSet = _getDbSetFromContext(entityContext);
             return (from e in dbSet
                     where e.EntityId == entity.EntityId
-                    select e).FirstOrDefault(); }
+                    select e).FirstOrDefault();
+        }
 
         protected virtual IEnumerable<T> GetEntities(U entityContext)
         {
@@ -62,10 +63,13 @@ namespace Core.Common.Data
 
             return results;
         }
+        #endregion
 
-        public T Add(T entity)
+
+        public T Add(T entity, U context = null)
         {
-            using (U entityContext = new U())
+            U entityContext = context ?? new U();
+            using (entityContext)
             {
                 T addedEntity = AddEntity(entityContext, entity);
 
@@ -74,18 +78,20 @@ namespace Core.Common.Data
             }
         }
 
-        public void Remove(T entity)
+        public void Remove(T entity, U context = null)
         {
-            using (U entityContext = new U())
+            U entityContext = context ?? new U();
+            using (entityContext)
             {
                 entityContext.Entry<T>(entity).State = EntityState.Deleted;
                 entityContext.SaveChanges();
             }
         }
 
-        public void Remove(int id)
+        public void Remove(int id, U context = null)
         {
-            using (U entityContext = new U())
+            U entityContext = context ?? new U();
+            using (entityContext)
             {
                 T entity = GetEntity(entityContext, id);
                 entityContext.Entry<T>(entity).State = EntityState.Deleted;
@@ -93,9 +99,10 @@ namespace Core.Common.Data
             }
         }
 
-        public T Update(T entity)
+        public T Update(T entity, U context)
         {
-            using (U entityContext = new U())
+            U entityContext = context ?? new U();
+            using (entityContext)
             {
                 T existingEntity = UpdateEntity(entityContext, entity);
 
@@ -106,16 +113,21 @@ namespace Core.Common.Data
             }
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(U context = null)
         {
-            using (U entityContext = new U())
+            U entityContext = context ?? new U();
+            using (entityContext)
                 return (GetEntities(entityContext)).ToArray().ToList();
         }
 
-        public T Get(int id)
+        public T Get(int id, U context = null)
         {
-            using (U entityContext = new U())
+            U entityContext = context ?? new U();
+            using (entityContext)
+            {
                 return GetEntity(entityContext, id);
+            }
         }
+
     }
 }

@@ -1,18 +1,21 @@
-﻿namespace Core.Common.Contracts
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Core.Common.Contracts
 {
     public interface IDataRepository
     {
 
     }
-    public interface IDataRepository<T>: IDataRepository
+    public interface IDataRepository<T, U>: IDataRepository
         where T : class,IIdentifiableEntity,new()
+        where U : DbContext, new()
     {
-        T Add(T entity);
-        void Remove(T entity);
-        void Remove(int id);
-        T Update(T entity);
-        IEnumerable<T> GetAll();
-        T Get(int id);
+        T Add(T entity, U context=null);
+        void Remove(T entity, U context=null);
+        void Remove(int id, U context=null);
+        T Update(T entity, U context=null);
+        IEnumerable<T> GetAll(U context=null);
+        T Get(int id,U context=null);
     }
 
 }
