@@ -21,12 +21,7 @@ namespace Glosolalia.Common.Entities
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public List<Word> WordSet { get; set; }
-		[NotMapped]
-		public int EntityId
-		{
-			get { return Id; }
-			set { Id = value; }
-		}
+
 	}
 
 

@@ -11,9 +11,12 @@ namespace Core.Common.Data
     public abstract class DataRepositoryBase<T, U> : IDataRepository<T, U>
         where T : class, IIdentifiableEntity, new()
         where U : DbContext, new()
+        /* wpuszczenie dodatkogo pola w metodach ktore odnosi sie to kontextu pozwoli to w miare ogarnąć 
+         * a wyjebanie usingów i zastapienie ifami pozwoli wykorzystywać metody żeby nie musieć potem dodawać obiektów do trackingu
+         * i nie robić burdelu z bazą*/
     {
         #region private and protected methods
-        private DbSet<T> _getDbSetFromContext(U entityContext)
+        protected DbSet<T> _getDbSetFromContext(U entityContext)
         /*TODO
          * reflection may cause slower work. May need changes. Example of repo in flatFinder
          */
@@ -41,7 +44,7 @@ namespace Core.Common.Data
         {
             var dbSet = _getDbSetFromContext(entityContext);
             return (from e in dbSet
-                    where e.EntityId == entity.EntityId
+                    where e.Id == entity.Id
                     select e).FirstOrDefault();
         }
 
@@ -56,7 +59,7 @@ namespace Core.Common.Data
         {
             var dbSet = _getDbSetFromContext(entityContext);
             var query = (from e in dbSet
-                         where e.EntityId == id
+                         where e.Id == id
                          select e);
 
             var results = query.FirstOrDefault();
@@ -69,13 +72,24 @@ namespace Core.Common.Data
         public T Add(T entity, U context = null)
         {
             U entityContext = context ?? new U();
-            using (entityContext)
+            T addedEntity;
+            try
             {
-                T addedEntity = AddEntity(entityContext, entity);
-
-                entityContext.SaveChanges();
-                return addedEntity;
+                addedEntity = AddEntity(entityContext, entity);
             }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if ((entityContext != null) && (context is null))// is method is used as a proxy don't care, somaeoneelse close and sava
+                {
+                    entityContext.SaveChanges();
+                    entityContext.Dispose();
+                }
+            }
+            return addedEntity;
         }
 
         public void Remove(T entity, U context = null)

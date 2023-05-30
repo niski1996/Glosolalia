@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 
 using Glosolalia.Common.Entities;
-using Glosolalia.Data.Contracts.Repository_Interface;
+using Glosolalia.Data.Repository_Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace Glosolalia.Data
@@ -13,41 +13,20 @@ namespace Glosolalia.Data
 	 * bo jest włąściewie bez sensu mieć puste słowo bez tłumaczenia.
 	 * Trzebaby sptrwdzić co się stanie jak usunę , czy pójdzie kaskada*/
 	{
-		private void _addWordsToTrackingIfExisting(GlosolaliaContext context, List<Word> wordSet)// ref jest,bo lista jest edydaowana,żeby nie było zdziwienia potem
-		{
-			for (int i = 0; i < wordSet.Count(); i++)
+        protected override Translation AddEntity(GlosolaliaContext entityContext, Translation entity)
+        {
+			var wrd = new WordRepository();
+			for (int i = 0; i < entity.WordSet.Count(); i++)
 			{
-				if (wordSet[i].Id != 0)
-				{
-					context.Words.Find(wordSet[i].Id);
-				}
-				else
-				{
-					Word checkedWord = wordSet[i];
-					Word existWord = context.Words.FirstOrDefault(
-						e => (
-						(e.Value == checkedWord.Value)
-						& (e.LanguageId == checkedWord.LanguageId)
-						));
-					if (existWord != null) { wordSet[i] = existWord; }
-				}
+				entity.WordSet[i] = wrd.Add(entity.WordSet[i], entityContext);
 			}
-		}
-		public void AddRelationalTranslation(Translation entity)
-		/*REFA|CTOR method used to create translation,when relations many-to-many are not empty
-		 * creating with nomal add cause problems, cause i create new context every time, wchat mean that scope is empyt
-		 * so ef core doesn't tracka any objects and tried to create everythink
-		 * NOTE bugs may hapend here fi ef core go deeper in relative graph*/
-		{
-			using (GlosolaliaContext entityContext = new())
-			{
-				_addWordsToTrackingIfExisting(entityContext, new List<Word> { entity.TranslatableTo,entity.TranslatableFrom});
-				Translation addedEntity = AddEntity(entityContext, entity);
+			List<int> idList = entity.WordSet.Select(e => e.Id).ToList();
+			var tmp = entityContext.TranslationSet.Where(a => a.WordSet.Any(b => idList.Contains(b.Id))).FirstOrDefault();// sprawdza czy taka translacja już istnieje
+            if (tmp != null) { return tmp; }
+            return entityContext.TranslationSet.Add(entity).Entity;
 
-				entityContext.SaveChanges();
-				return;
-			}
-		}
+
+        }
 	}
 }
 

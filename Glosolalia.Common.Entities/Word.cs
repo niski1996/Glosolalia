@@ -29,12 +29,6 @@ namespace Glosolalia.Common.Entities
 		public string Value { get; set; }
 		public List<Translation> TranslationSet { get; set; }
 
-		[NotMapped]
-		public int EntityId
-		{
-			get { return Id; }
-			set { Id = value; }
-		}
 
 		public Language Language { get; set; }
         public int LanguageId { get; set; }

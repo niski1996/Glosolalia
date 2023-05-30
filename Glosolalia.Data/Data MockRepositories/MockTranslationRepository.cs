@@ -1,7 +1,7 @@
 ﻿
 
 using Glosolalia.Common.Entities;
-using Glosolalia.Data.Contracts.Repository_Interface;
+using Glosolalia.Data.Repository_Interface;
 
 namespace Glosolalia.Data.Data_MockRepositories
 {
@@ -23,8 +23,7 @@ namespace Glosolalia.Data.Data_MockRepositories
 			return (new Translation()
 			{
 				Id = 1,
-				TranslatableFrom = new Word("tr", 1),
-				TranslatableTo = new Word("triallo", 2)
+				WordSet =new() { new Word("tr", 1), new Word("triallo", 2) }
 			});
 		}
 
@@ -39,33 +38,34 @@ namespace Glosolalia.Data.Data_MockRepositories
 							new Translation()
 							{
 								Id = 1,
-								TranslatableFrom = new Word("kot", 1),
-								TranslatableTo = new Word("cat", 2) }
+                                WordSet =new() { new Word("tr", 1), new Word("triallo", 2) }
+                                }
 							,new Translation()
 							{
 								Id = 2,
-								TranslatableFrom = new Word("dom", 1),
-								TranslatableTo = new Word("house", 2) }
+                                WordSet =new() { new Word("trll", 1), new Word("triallo", 2) }
+                                }
 							,new Translation()
 							{
 								Id = 3,
-								TranslatableFrom = new Word("droga", 1),
-								TranslatableTo = new Word("road", 2) }
+                                WordSet =new() { new Word("aatr", 1), new Word("triallo", 2) }
+                            }
 							,new Translation()
 							{
 								Id = 4,
-								TranslatableFrom = new Word("krzesło", 1),
-								TranslatableTo = new Word("chair", 2) }
+                                WordSet =new() { new Word("vvtr", 1), new Word("triallo", 2) }
+                            }
 							,new Translation()
 							{
 								Id = 10,
-								TranslatableFrom = new Word("mysz", 1),
-								TranslatableTo = new Word("mouse", 2) }
+                                WordSet =new() { new Word("twwr", 1), new Word("triallo", 2) }
+                            }
 							,new Translation()
 							{
 								Id = 199,
-								TranslatableFrom = new Word("pies", 1),
-								TranslatableTo = new Word("dog", 2)}, });
+                                WordSet =new() { new Word("rrtr", 1), new Word("triallo", 2) }
+                                },
+								});
 
 
 

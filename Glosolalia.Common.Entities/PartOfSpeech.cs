@@ -9,11 +9,7 @@ namespace Glosolalia.Common.Entities
     {
         public int Id { get; set; }
         public string Value { get; set; }
-        public int EntityId
-        {
-            get { return Id; }
-            set { Id = value; }
-        }
+       
     }
 
 

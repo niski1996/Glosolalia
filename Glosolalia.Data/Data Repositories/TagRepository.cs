@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Glosolalia.Common.Entities;
-using Glosolalia.Data.Contracts.Repository_Interface;
+using Glosolalia.Data.Repository_Interface;
 
 namespace Glosolalia.Data
 {

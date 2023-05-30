@@ -1,50 +1,67 @@
-﻿//using AutoMapper;
-//using CityInfo.API.Models;
+﻿//using CityInfo.API;
+//using CityInfo.API.DbContexts;
 //using CityInfo.API.Services;
-//using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.StaticFiles;
+//using Microsoft.EntityFrameworkCore;
+//using Serilog;
 
-//namespace CityInfo.API.Controllers
+//Log.Logger = new LoggerConfiguration()
+//    .MinimumLevel.Debug()
+//    .WriteTo.Console()
+//    .WriteTo.File("logs/cityinfo.txt", rollingInterval: RollingInterval.Day)
+//    .CreateLogger();
+
+//var builder = WebApplication.CreateBuilder(args);
+////builder.Logging.ClearProviders();
+////builder.Logging.AddConsole();
+
+//builder.Host.UseSerilog();
+
+//// Add services to the container.
+
+//builder.Services.AddControllers(options =>
 //{
-//    [ApiController]
-//    [Route("api/cities")]
-//    public class CitiesController : ControllerBase
-//    {
-//        private readonly ICityInfoRepository _cityInfoRepository;
-//        private readonly IMapper _mapper;
+//    options.ReturnHttpNotAcceptable = true;
+//}).AddNewtonsoftJson()
+//.AddXmlDataContractSerializerFormatters();
 
-//        public CitiesController(ICityInfoRepository cityInfoRepository,
-//            IMapper mapper)
-//        {
-//            _cityInfoRepository = cityInfoRepository ??
-//                throw new ArgumentNullException(nameof(cityInfoRepository));
-//            _mapper = mapper ??
-//                throw new ArgumentNullException(nameof(mapper));
-//        }
 
-//        [HttpGet]
-//        public async Task<ActionResult<IEnumerable<CityWithoutPointsOfInterestDto>>> GetCities()
-//        {
-//            var cityEntities = await _cityInfoRepository.GetCitiesAsync();
-//            return Ok(_mapper.Map<IEnumerable<CityWithoutPointsOfInterestDto>>(cityEntities));
+//// Learn more about configuring Swagger/OpenAPI at
+//// https://aka.ms/aspnetcore/swashbuckle
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
+//builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
-//        }
+//#if DEBUG
+//builder.Services.AddTransient<IMailService, LocalMailService>();
+//#else 
+//builder.Services.AddTransient<IMailService, CloudMailService>();
+//#endif
 
-//        [HttpGet("{id}")]
-//        public async Task<IActionResult> GetCity(
-//            int id, bool includePointsOfInterest = false)
-//        {
-//            var city = await _cityInfoRepository.GetCityAsync(id, includePointsOfInterest);
-//            if (city == null)
-//            {
-//                return NotFound();
-//            }
+//builder.Services.AddSingleton<CitiesDataStore>();
 
-//            if (includePointsOfInterest)
-//            {
-//                return Ok(_mapper.Map<CityDto>(city));
-//            }
+//builder.Services.AddDbContext<CityInfoContext>(
+//    dbContextOptions => dbContextOptions.UseSqlite(
+//        builder.Configuration["ConnectionStrings:CityInfoDBConnectionString"]));
 
-//            return Ok(_mapper.Map<CityWithoutPointsOfInterestDto>(city));
-//        }
-//    }
+//var app = builder.Build();
+
+//// Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
 //}
+
+//app.UseHttpsRedirection();
+
+//app.UseRouting();
+
+//app.UseAuthorization();
+
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapControllers();
+//});
+
+//app.Run();

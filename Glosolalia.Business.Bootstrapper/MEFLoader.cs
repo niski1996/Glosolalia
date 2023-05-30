@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using Glosolalia.Data;
-using Glosolalia.Data.Contracts.Repository_Interface;
+using Glosolalia.Data.Repository_Interface;
 
 namespace Glosolalia.Business.Bootstrapper
 {

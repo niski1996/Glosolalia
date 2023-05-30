@@ -2,15 +2,15 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
+using Core.Common.Core;
 
 namespace Glosolalia.Common.Entities
 {
 	[DataContract]
-	public class Sheet : IIdentifiableEntity
+	public class Sheet : EntityBase, IIdentifiableEntity
 	{
         public Sheet()
         {
-			TranslationSet = new();
 		}
         public Sheet(string name):this()
         {
@@ -27,12 +27,6 @@ namespace Glosolalia.Common.Entities
 		[NotMapped]
         public Dictionary<int, int> ProgressDictionary { get; set; } = new();/* dictionary show progress - how many is in these sheet Translation with
                                                                               * exact progress, for example  Translation with progress1, 0 Translation with 5 etc. */
-        [NotMapped]
-		public int EntityId
-		{
-			get { return Id; }
-			set { Id = value; }
-		}
 
 	}
 

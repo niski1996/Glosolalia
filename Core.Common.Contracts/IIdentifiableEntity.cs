@@ -5,7 +5,7 @@ namespace Core.Common.Contracts
     public interface IIdentifiableEntity
     {
         [NotMapped]
-        int EntityId { get; set; }
+        int Id { get; set; }
     }
 
 }

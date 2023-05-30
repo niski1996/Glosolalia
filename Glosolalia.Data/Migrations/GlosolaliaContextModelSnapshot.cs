@@ -70,6 +70,12 @@ namespace Glosolalia.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastEdit")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -119,14 +125,9 @@ namespace Glosolalia.Data.Migrations
                     b.Property<int>("Progress")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SheetId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PartOfSpeechId");
-
-                    b.HasIndex("SheetId");
 
                     b.ToTable("TranslationSet");
                 });
@@ -154,6 +155,21 @@ namespace Glosolalia.Data.Migrations
                     b.ToTable("Words");
                 });
 
+            modelBuilder.Entity("SheetTranslation", b =>
+                {
+                    b.Property<int>("SheetSetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TranslationSetId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SheetSetId", "TranslationSetId");
+
+                    b.HasIndex("TranslationSetId");
+
+                    b.ToTable("SheetTranslation");
+                });
+
             modelBuilder.Entity("TagTranslation", b =>
                 {
                     b.Property<int>("TagsId")
@@ -171,15 +187,15 @@ namespace Glosolalia.Data.Migrations
 
             modelBuilder.Entity("TranslationWord", b =>
                 {
-                    b.Property<int>("TranslatableSetId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TranslationSetId")
                         .HasColumnType("int");
 
-                    b.HasKey("TranslatableSetId", "TranslationSetId");
+                    b.Property<int>("WordSetId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("TranslationSetId");
+                    b.HasKey("TranslationSetId", "WordSetId");
+
+                    b.HasIndex("WordSetId");
 
                     b.ToTable("TranslationWord");
                 });
@@ -189,10 +205,6 @@ namespace Glosolalia.Data.Migrations
                     b.HasOne("Glosolalia.Common.Entities.PartOfSpeech", "PartOfSpeech")
                         .WithMany()
                         .HasForeignKey("PartOfSpeechId");
-
-                    b.HasOne("Glosolalia.Common.Entities.Sheet", null)
-                        .WithMany("TranslationSet")
-                        .HasForeignKey("SheetId");
 
                     b.Navigation("PartOfSpeech");
                 });
@@ -206,6 +218,21 @@ namespace Glosolalia.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Language");
+                });
+
+            modelBuilder.Entity("SheetTranslation", b =>
+                {
+                    b.HasOne("Glosolalia.Common.Entities.Sheet", null)
+                        .WithMany()
+                        .HasForeignKey("SheetSetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Glosolalia.Common.Entities.Translation", null)
+                        .WithMany()
+                        .HasForeignKey("TranslationSetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TagTranslation", b =>
@@ -225,15 +252,15 @@ namespace Glosolalia.Data.Migrations
 
             modelBuilder.Entity("TranslationWord", b =>
                 {
-                    b.HasOne("Glosolalia.Common.Entities.Word", null)
-                        .WithMany()
-                        .HasForeignKey("TranslatableSetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Glosolalia.Common.Entities.Translation", null)
                         .WithMany()
                         .HasForeignKey("TranslationSetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Glosolalia.Common.Entities.Word", null)
+                        .WithMany()
+                        .HasForeignKey("WordSetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -241,11 +268,6 @@ namespace Glosolalia.Data.Migrations
             modelBuilder.Entity("Glosolalia.Common.Entities.Language", b =>
                 {
                     b.Navigation("WordSet");
-                });
-
-            modelBuilder.Entity("Glosolalia.Common.Entities.Sheet", b =>
-                {
-                    b.Navigation("TranslationSet");
                 });
 #pragma warning restore 612, 618
         }
