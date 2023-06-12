@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using Glosolalia.API.DTOs.SheetDTOs;
 using Glosolalia.Common.Entities;
-using Glosolalia.Common.Entities.DTOs.SheetDTOs;
 using Glosolalia.Data.Repository_Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +22,55 @@ namespace Glosolalia.API.Controllers
                 throw new ArgumentException(nameof(sheetRepository));
         }
         [HttpGet]
-        public ActionResult<IEnumerable<SheetBaseInfoDto>> GetSheetSet()
+        public ActionResult GetSheetSet(int? languageId, string name = "", string type = "base")
         {
-            var sheetEntities = _sheetRepository.GetAll();
-            return Ok(_mapper.Map<IEnumerable<SheetBaseInfoDto>>(sheetEntities));
+            IEnumerable<Sheet> sheetSet;
+            switch (type)
+            {
+                case "calculated":
+                    sheetSet = _sheetRepository.GetAll(true, false);
+                    break;
+                case "full":
+                    sheetSet = _sheetRepository.GetAll(false, true);
+                    break;
+                default:
+                    sheetSet = _sheetRepository.GetAll();
+                    break;
+            }
+            sheetSet = sheetSet.Where(e =>e.Name.ToLower().Contains(name.ToLower())).
+                Where(e => ((languageId == null ? 0 : languageId) == (languageId == null ? 0 : e.LanguageOneId)) ||
+                ((languageId == null ? 0 : languageId) == (languageId == null ? 0 : e.LanguageTwoId)));
+
+            switch (type)
+            {
+                
+                case "base":
+                    return Ok(_mapper.Map<IEnumerable<BaseSheetDTO>>(sheetSet));
+                case "calculated":
+                        return Ok(_mapper.Map<IEnumerable<CalcualtedSheetDTO>>(sheetSet));
+
+                case "full":
+                    throw new NotImplementedException();
+                default:
+                    return Ok(_mapper.Map<IEnumerable<BaseSheetDTO>>(sheetSet));
+            }
+
+        }
+        [HttpGet("{id}")]
+        public ActionResult GetSheet(int id, string type = "base")
+        {
+            switch (type)
+            {
+
+                case "base":
+                    return Ok(_mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id)));
+                case "calculated":
+                    return Ok(_mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id,true, false)));
+                case "full":
+                    throw new NotImplementedException();
+                default:
+                    return Ok(_mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id)));
+            }
 
         }
         //[HttpGet("{id})")]

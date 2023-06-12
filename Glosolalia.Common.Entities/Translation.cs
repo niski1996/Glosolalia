@@ -10,11 +10,17 @@ namespace Glosolalia.Common.Entities
 	{
         public Translation()
         {
-
+            
         }
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Translation(List<Sheet> sheetSet,PartOfSpeech? PartOfSpeech= null, List < Tag >? tags=null)
+        {
+			if (sheetSet.Count()!=2)
+			{
+				throw new ApplicationException("translation must contain exacly 2 words");
+			}
+        }
 		public int Id { get; set; }
-		public List<Word> WordSet { get; set; } = new ();//Tzeba sprawdzać czy są dokładnie 2, property zalnie sie tym która translacja jest jaka
+		public List<Word> WordSet { get; set; } = new ();//Tzeba sprawdzać czy są dokładnie 2, property zalnie sie tym która translacja jest jaka, potem taka konstrukcja bedzie wygodniejsza przy wyswietlaniu fiszek
 		public int Progress { get; set; } = 0;
 		public int? PartOfSpeechId { get; set; }
 		public PartOfSpeech? PartOfSpeech { get; set; }

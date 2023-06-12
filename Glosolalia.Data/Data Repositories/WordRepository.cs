@@ -16,7 +16,7 @@ namespace Glosolalia.Data
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class WordRepository : DataRepositoryBase<Word>, IWordRepository
     {
-        protected override Word AddEntity(GlosolaliaContext entityContext, Word entity)
+        protected override Word AddEntity(GlosolaliaContext entityContext, Word entity)// TODO jeżeli przy dodawaniu  z jednej listy,  wjednym konteksice jedno słowo ma podwójne 
         {
 
             var dbSet = _getDbSetFromContext(entityContext);

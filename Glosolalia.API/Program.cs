@@ -4,6 +4,10 @@ using Glosolalia.Data.Repository_Interface;
 using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
+if (builder.Environment.IsDevelopment())
+{
+    //builder.Configuration.AddUserSecrets<Program>();
+}
 
 
 // Add services to the container.
@@ -15,7 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
 builder.Services.AddDbContext<GlosolaliaContext>();
-builder.Services.AddScoped<ISheetRepository, MockSheetRepository>();
+builder.Services.AddScoped<ISheetRepository, SheetRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();

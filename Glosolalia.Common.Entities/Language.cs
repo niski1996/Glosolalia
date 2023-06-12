@@ -9,7 +9,7 @@ namespace Glosolalia.Common.Entities
 	{
         public Language()
 		{
-			WordSet = new();
+			//WordSet = new();
 		}
         public Language(string name):this()
         {
@@ -20,7 +20,7 @@ namespace Glosolalia.Common.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public List<Word> WordSet { get; set; }
+		//public List<Word> WordSet { get; set; }
 
 	}
 

@@ -4,6 +4,7 @@ using Glosolalia.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Glosolalia.Data.Migrations
 {
     [DbContext(typeof(GlosolaliaContext))]
-    partial class GlosolaliaContextModelSnapshot : ModelSnapshot
+    [Migration("20230604035912_before first full seed")]
+    partial class beforefirstfullseed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,25 +73,14 @@ namespace Glosolalia.Data.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LanguageOneId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LanguageTwoId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("LastEdit")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("LanguageOneId");
-
-                    b.HasIndex("LanguageTwoId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -203,25 +195,6 @@ namespace Glosolalia.Data.Migrations
                     b.HasIndex("WordSetId");
 
                     b.ToTable("TranslationWord");
-                });
-
-            modelBuilder.Entity("Glosolalia.Common.Entities.Sheet", b =>
-                {
-                    b.HasOne("Glosolalia.Common.Entities.Language", "LanguageOne")
-                        .WithMany()
-                        .HasForeignKey("LanguageOneId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Glosolalia.Common.Entities.Language", "LanguageTwo")
-                        .WithMany()
-                        .HasForeignKey("LanguageTwoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("LanguageOne");
-
-                    b.Navigation("LanguageTwo");
                 });
 
             modelBuilder.Entity("Glosolalia.Common.Entities.Translation", b =>

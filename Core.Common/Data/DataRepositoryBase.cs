@@ -69,17 +69,14 @@ namespace Core.Common.Data
         #endregion
 
 
-        public T Add(T entity, U context = null)
+        public T Add(T entity, U? context = null)
         {
             U entityContext = context ?? new U();
             T addedEntity;
             try
             {
+
                 addedEntity = AddEntity(entityContext, entity);
-            }
-            catch
-            {
-                throw;
             }
             finally
             {
@@ -92,7 +89,7 @@ namespace Core.Common.Data
             return addedEntity;
         }
 
-        public void Remove(T entity, U context = null)
+        public void Remove(T entity, U? context = null)
         {
             U entityContext = context ?? new U();
             using (entityContext)
@@ -102,7 +99,7 @@ namespace Core.Common.Data
             }
         }
 
-        public void Remove(int id, U context = null)
+        public void Remove(int id, U? context = null)
         {
             U entityContext = context ?? new U();
             using (entityContext)
@@ -127,14 +124,14 @@ namespace Core.Common.Data
             }
         }
 
-        public IEnumerable<T> GetAll(U context = null)
+        public IEnumerable<T> GetAll(U? context = null)
         {
             U entityContext = context ?? new U();
             using (entityContext)
                 return (GetEntities(entityContext)).ToArray().ToList();
         }
 
-        public T Get(int id, U context = null)
+        public T Get(int id, U? context = null)
         {
             U entityContext = context ?? new U();
             using (entityContext)

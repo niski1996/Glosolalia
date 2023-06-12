@@ -24,7 +24,10 @@ namespace Glosolalia.Common.Entities
 			LanguageId = languageId;
 
 		}
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Word(string value, Language language) : this(value,language.Id) {}
+
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
 		public string Value { get; set; }
 		public List<Translation> TranslationSet { get; set; }

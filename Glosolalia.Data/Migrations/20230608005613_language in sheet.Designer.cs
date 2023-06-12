@@ -4,6 +4,7 @@ using Glosolalia.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Glosolalia.Data.Migrations
 {
     [DbContext(typeof(GlosolaliaContext))]
-    partial class GlosolaliaContextModelSnapshot : ModelSnapshot
+    [Migration("20230608005613_language in sheet")]
+    partial class languageinsheet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,13 +213,13 @@ namespace Glosolalia.Data.Migrations
                     b.HasOne("Glosolalia.Common.Entities.Language", "LanguageOne")
                         .WithMany()
                         .HasForeignKey("LanguageOneId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Glosolalia.Common.Entities.Language", "LanguageTwo")
                         .WithMany()
                         .HasForeignKey("LanguageTwoId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("LanguageOne");

@@ -82,17 +82,10 @@ namespace Glosolalia.Data
 		//}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            modelBuilder.Ignore<IIdentifiableEntity>();
-
             modelBuilder.Ignore<PropertyChangedEventHandler>();
             modelBuilder.Ignore<ExtensionDataObject>();
-            modelBuilder.Ignore<IIdentifiableEntity>();
-			//modelBuilder.Entity<Translation>().Navigation(e => e.TranslatableFrom).AutoInclude();
-			modelBuilder.Entity<Translation>().Navigation(e => e.WordSet).AutoInclude();
-            modelBuilder.Entity<Sheet>().HasIndex(e => e.Name).IsUnique();
-            modelBuilder.Entity<Language>().HasIndex(e => e.Name).IsUnique();
-            modelBuilder.Entity<Word>().HasIndex(e => new {e.LanguageId,e.Value}).IsUnique();
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(GlosolaliaContext).Assembly);
 
 
 
@@ -117,15 +110,15 @@ namespace Glosolalia.Data
 			//}
    //     }
 
-        private bool IsDuplicateIndexException(DbUpdateException ex)
-        {
-            // Sprawdź, czy wyjątek jest wynikiem duplikatu indeksu
-            // W zależności od dostawcy bazy danych, konkretna logika może się różnić
-            // Możesz na przykład sprawdzić, czy wyjątek zawiera określony kod błędu SQL
+        //private bool IsDuplicateIndexException(DbUpdateException ex)
+        //{
+        //    // Sprawdź, czy wyjątek jest wynikiem duplikatu indeksu
+        //    // W zależności od dostawcy bazy danych, konkretna logika może się różnić
+        //    // Możesz na przykład sprawdzić, czy wyjątek zawiera określony kod błędu SQL
 
-            // Przykładowa logika dla dostawcy SQL Server
-            return ex.InnerException is SqlException sqlException && sqlException.Number == 2601;
-        }
+        //    // Przykładowa logika dla dostawcy SQL Server
+        //    return ex.InnerException is SqlException sqlException && sqlException.Number == 2601;
+        //}
     }
 }
 

@@ -28,9 +28,9 @@ namespace Glosolalia.Data.Test
                 {
                     context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
-                    List<Language> li = new() {new Language() { Name = "Spanish", WordSet = new() },
-                    new Language() { Name = "Polish", WordSet = new() },
-                    new Language() { Name = "English", WordSet = new()} };
+                    List<Language> li = new() {new Language() { Name = "Spanish"},
+                    new Language() { Name = "Polish" },
+                    new Language() { Name = "English"} };
                     context.LanguageSet.AddRange(li);
                     context.SaveChanges();
 
@@ -109,9 +109,5 @@ namespace Glosolalia.Data.Test
 
             };
         }
-
-
-
-
     }
 }

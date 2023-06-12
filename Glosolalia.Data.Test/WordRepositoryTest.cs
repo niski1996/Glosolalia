@@ -28,9 +28,9 @@ namespace Glosolalia.Data.Test
                 {
                     context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
-                    List<Language> li = new() {new Language() { Name = "Spanish", WordSet = new() },
-                    new Language() { Name = "Polish", WordSet = new() },
-                    new Language() { Name = "English", WordSet = new()} };
+                    List<Language> li = new() {new Language() { Name = "Spanish" },
+                    new Language() { Name = "Polish"},
+                    new Language() { Name = "English"} };
                     context.LanguageSet.AddRange(li);
                     context.SaveChanges();
 
@@ -56,7 +56,7 @@ namespace Glosolalia.Data.Test
 
         }
         [TestMethod]
-        public void SameWord()
+        public void SameWordAdd()
             /*oczekuje że nie zostanie dodane, ale nie powinno wykórwić błędów, bo to się mija z
              * celem, nie potrzebuje obsrywać każdej sesji milionem bledów, a jesli to choć troche zautoamtyzuje
              * to ich bedzie w cholere i nic mi do tego */
@@ -74,6 +74,30 @@ namespace Glosolalia.Data.Test
                 context.SaveChanges();
                 wordRepo.Add(new Word(exeVal, 1), context);
                 context.SaveChanges();
+                Assert.AreEqual(initWords + 1, context.Words.Count());
+            }
+
+        }
+
+        [TestMethod]
+        public void WordGet()
+        /*oczekuje że nie zostanie dodane, ale nie powinno wykórwić błędów, bo to się mija z
+         * celem, nie potrzebuje obsrywać każdej sesji milionem bledów, a jesli to choć troche zautoamtyzuje
+         * to ich bedzie w cholere i nic mi do tego */
+
+        {
+            var wordRepo = new WordRepository();
+
+            var exeVal = Guid.NewGuid().ToString();
+
+
+            using (GlosolaliaContext context = new GlosolaliaContext(builder.Options))
+            {
+                var initWords = context.Words.Count();
+                var tmp = wordRepo.Add(new Word(exeVal, 1), context);
+                context.SaveChanges();
+                var tmp2 = wordRepo.Get(tmp.Id);
+
                 Assert.AreEqual(initWords + 1, context.Words.Count());
             }
 
