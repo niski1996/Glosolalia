@@ -8,8 +8,8 @@ namespace Glosolalia.API.DTOs.SheetDTOs
         public int Medium { get; set; }
         public int Pro { get; set; }
         public int Points { get; set; }
-        public Language LanguageOne { get; set; } = null!;
-        public Language LanguageTwo { get; set; } = null!;
+        public int LanguageOneId { get; set; }
+        public int LanguageTwoId { get; set; }
         public int TranslationAmount { get 
             {
                 return Begginer + Medium + Pro;

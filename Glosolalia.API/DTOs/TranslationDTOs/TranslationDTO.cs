@@ -1,6 +1,6 @@
 ﻿using Glosolalia.Common.Entities;
 
-namespace Glosolalia.API.DTOs
+namespace Glosolalia.API.DTOs.TranslationDTOs
 {
     public class TranslationDTO
     {
@@ -8,7 +8,7 @@ namespace Glosolalia.API.DTOs
         public int Progress { get; set; }
         public string ValueWordOne { get; set; } = "";
         public string ValueWordTwo { get; set; } = "";
-        public int LnaguageIdWordOne { get; set;}
+        public int LanguageIdWordOne { get; set; }
         public int LanguageIdWordTwo { get; set; }
 
     }

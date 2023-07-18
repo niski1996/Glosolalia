@@ -52,7 +52,9 @@ namespace Glosolalia.Data
             using (GlosolaliaContext entityContext = new())
             {
                 if (AllIncluded)
+                {
                     return entityContext.SheetSet.Include(e => e.TranslationSet).ThenInclude(e => e.WordSet).Where(e => e.Id == id).FirstOrDefault();
+                }
                 else if (WordIncluded)
                 {
                     return entityContext.SheetSet.Include(e => e.TranslationSet).ThenInclude(e => e.WordSet).Where(e => e.Id == id).FirstOrDefault();

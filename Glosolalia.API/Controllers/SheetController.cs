@@ -30,9 +30,6 @@ namespace Glosolalia.API.Controllers
                 case "calculated":
                     sheetSet = _sheetRepository.GetAll(true, false);
                     break;
-                case "full":
-                    sheetSet = _sheetRepository.GetAll(false, true);
-                    break;
                 default:
                     sheetSet = _sheetRepository.GetAll();
                     break;
@@ -48,9 +45,6 @@ namespace Glosolalia.API.Controllers
                     return Ok(_mapper.Map<IEnumerable<BaseSheetDTO>>(sheetSet));
                 case "calculated":
                         return Ok(_mapper.Map<IEnumerable<CalcualtedSheetDTO>>(sheetSet));
-
-                case "full":
-                    throw new NotImplementedException();
                 default:
                     return Ok(_mapper.Map<IEnumerable<BaseSheetDTO>>(sheetSet));
             }
@@ -65,9 +59,9 @@ namespace Glosolalia.API.Controllers
                 case "base":
                     return Ok(_mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id)));
                 case "calculated":
-                    return Ok(_mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id,true, false)));
+                    return Ok(_mapper.Map<CalcualtedSheetDTO>(_sheetRepository.Get(id,true, false)));
                 case "full":
-                    throw new NotImplementedException();
+                    return Ok(_mapper.Map<FullSheetDTO>(_sheetRepository.Get(id, false, true)));
                 default:
                     return Ok(_mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id)));
             }
