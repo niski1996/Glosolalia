@@ -13,10 +13,13 @@ if (builder.Environment.IsDevelopment())
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddNewtonsoftJson(o =>
+builder.Services.AddControllers(options=>
+{
+    options.ReturnHttpNotAcceptable = true;
+}).AddNewtonsoftJson(o =>
 {
     o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
-});
+}).AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 

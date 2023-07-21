@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Glosolalia.API.DTOs.SheetDTOs;
+using Glosolalia.API.DTOs.TranslationDTOs;
 using Glosolalia.Common.Entities;
 using Glosolalia.Data.Repository_Interface;
 using Microsoft.AspNetCore.Http;
@@ -57,15 +58,26 @@ namespace Glosolalia.API.Controllers
             {
 
                 case "base":
-                    return Ok(_mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id)));
+                    var baseSheet = _mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id));
+                    return baseSheet is null ? NotFound() : Ok(baseSheet);
                 case "calculated":
-                    return Ok(_mapper.Map<CalcualtedSheetDTO>(_sheetRepository.Get(id,true, false)));
+                    var calcSheet = _mapper.Map<CalcualtedSheetDTO>(_sheetRepository.Get(id, true, false));
+                    return calcSheet is null ? NotFound() : Ok(calcSheet);
                 case "full":
-                    return Ok(_mapper.Map<FullSheetDTO>(_sheetRepository.Get(id, false, true)));
+                    var fullSheet = _mapper.Map<FullSheetDTO>(_sheetRepository.Get(id, false, true));
+                    return fullSheet is null ? NotFound() : Ok(fullSheet);
                 default:
-                    return Ok(_mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id)));
+                    var defSheet = _mapper.Map<BaseSheetDTO>(_sheetRepository.Get(id));
+                    return defSheet is null ? NotFound() : Ok(defSheet);
             }
 
+        }
+
+        [HttpGet("{SheetId}/translations")]
+        public ActionResult<List<TranslationDTO>> GetTranslationFromSheet(int SheetId)
+        {
+            var fullSheet = _mapper.Map<FullSheetDTO>(_sheetRepository.Get(SheetId, false, true));
+            return fullSheet is null ? NotFound() : Ok(fullSheet.TranslationSet);
         }
         //[HttpGet("{id})")]
         //public IActionResult GetSheet(int sheetId,bool includeTranslations = false)

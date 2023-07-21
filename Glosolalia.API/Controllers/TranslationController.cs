@@ -22,7 +22,7 @@ namespace Glosolalia.API.Controllers
                 throw new ArgumentException(nameof(translationRepository));
         }
         [HttpGet]
-        public ActionResult<TranslationDTO> GetAll()
+        public ActionResult<List<TranslationDTO>> GetAll()
         {
             return Ok(_mapper.Map<List<TranslationDTO>>(_translationRepository.GetAll()));
         }
@@ -31,7 +31,8 @@ namespace Glosolalia.API.Controllers
         public ActionResult<TranslationDTO> Get(int id)
         {
             return Ok(_mapper.Map<TranslationDTO> (_translationRepository.Get(id)));
-        } 
-          
+        }
+
+
     }
 }
