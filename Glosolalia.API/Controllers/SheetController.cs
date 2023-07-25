@@ -79,10 +79,11 @@ namespace Glosolalia.API.Controllers
             var fullSheet = _mapper.Map<FullSheetDTO>(_sheetRepository.Get(SheetId, false, true));
             return fullSheet is null ? NotFound() : Ok(fullSheet.TranslationSet);
         }
-        //[HttpGet("{id})")]
-        //public IActionResult GetSheet(int sheetId,bool includeTranslations = false)
-        //{ 
-        //    //var Sheet = 
-        //}
+        [HttpPost("{SheetId}/translations")]
+        public ActionResult<TranslationDTO> CreateTranslation(TranslationForCreationDTO translationForCreationDTO,int SheetId)
+        {
+            return Ok();
+        }
+
     }
 }

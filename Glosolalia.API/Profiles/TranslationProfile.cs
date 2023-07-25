@@ -13,11 +13,19 @@ namespace Glosolalia.API.Profiles
         //    calcMap
         public TranslationProfile()
         {
-            var map = CreateMap<Translation, TranslationDTO>();
-            map = map.ForMember(dest => dest.ValueWordOne, opt => opt.MapFrom(src => src.WordSet[0].Value));
-            map = map.ForMember(dest => dest.ValueWordTwo, opt => opt.MapFrom(src => src.WordSet[1].Value));
-            map = map.ForMember(dest => dest.LanguageIdWordOne, opt => opt.MapFrom(src => src.WordSet[0].LanguageId));
-            map = map.ForMember(dest => dest.LanguageIdWordTwo, opt => opt.MapFrom(src => src.WordSet[1].LanguageId));
+            CreateMap<Translation, TranslationForCreationDTO>();
+            CreateMap<TranslationForCreationDTO, Translation>().
+                ForMember(dest => dest.WordSet, opt => opt.MapFrom(src => new List<Word> {
+                new Word(src.ValueWordOne,src.LanguageIdWordOne),
+                new Word(src.ValueWordTwo,src.LanguageIdWordTwo)
+                }
+                )
+                );
+            var mapOne = CreateMap<Translation, TranslationDTO>();
+            mapOne = mapOne.ForMember(dest => dest.ValueWordOne, opt => opt.MapFrom(src => src.WordSet[0].Value));
+            mapOne = mapOne.ForMember(dest => dest.ValueWordTwo, opt => opt.MapFrom(src => src.WordSet[1].Value));
+            mapOne = mapOne.ForMember(dest => dest.LanguageIdWordOne, opt => opt.MapFrom(src => src.WordSet[0].LanguageId));
+            mapOne = mapOne.ForMember(dest => dest.LanguageIdWordTwo, opt => opt.MapFrom(src => src.WordSet[1].LanguageId));
         }
     }
 }
