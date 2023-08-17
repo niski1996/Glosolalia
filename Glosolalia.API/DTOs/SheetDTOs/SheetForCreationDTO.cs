@@ -1,6 +1,7 @@
 ﻿using Glosolalia.Common.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 
 namespace Glosolalia.API.DTOs.SheetDTOs
 {
@@ -21,5 +22,14 @@ namespace Glosolalia.API.DTOs.SheetDTOs
         public Language LanguageTwo { get; set; }
         public int LanguageTwoId { get; set; }
 
-}
+    }
+    public class SheetForCreationDTOValidator : AbstractValidator<SheetForCreationDTO>
+    {
+        public SheetForCreationDTOValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty()
+                .Matches(@"^\w*$")
+                .WithMessage("Only alfanumeric signs are allowed");
+        }
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Glosolalia.Common.Entities;
+﻿using FluentValidation;
+using Glosolalia.Common.Entities;
 
 namespace Glosolalia.API.DTOs.SheetDTOs
 {
@@ -29,6 +30,20 @@ namespace Glosolalia.API.DTOs.SheetDTOs
                 }
                 
             }
+        }
+    }
+    public class CalcualtedSheetDTOValidator : AbstractValidator<CalcualtedSheetDTO>
+    {
+        public CalcualtedSheetDTOValidator()
+        {
+            RuleFor(x => x.Id).NotEmpty().GreaterThan(0);
+            RuleFor(x => x.Name).NotEmpty()
+                .Matches(@"^\w*$")
+                .WithMessage("Only alfanumeric signs are allowed");
+            RuleFor(x=>x.Medium).NotEmpty().GreaterThan(0);
+            RuleFor(x=>x.Progress).NotEmpty().GreaterThan(0);
+            RuleFor(x=>x.Begginer).NotEmpty().GreaterThan(0);
+
         }
     }
 }

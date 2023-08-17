@@ -1,3 +1,5 @@
+using FluentValidation;
+using Glosolalia.API.DTOs.SheetDTOs;
 using Glosolalia.Data;
 using Glosolalia.Data.Data_MockRepositories;
 using Glosolalia.Data.Repository_Interface;
@@ -30,6 +32,7 @@ builder.Services.AddDbContext<GlosolaliaContext>();
 builder.Services.AddScoped<ISheetRepository, SheetRepository>();
 builder.Services.AddScoped<ITranslationRepository, TranslationRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddValidatorsFromAssemblyContaining<CalcualtedSheetDTOValidator>();
 
 var app = builder.Build();
 
